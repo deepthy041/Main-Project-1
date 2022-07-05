@@ -1,0 +1,61 @@
+<section>
+    <div class="container">
+      <div class="row">
+          
+              <div class="col-md-12">
+                  <h2 class="text-center">Add category</h2>
+                    <form action="/admin/add-category" method="post" enctype="multipart/form-data">
+                        <label for="">Name of category</label>
+                        <input type="text" name="Name" id="Name" class="form-control" onkeyup="validateName()">
+
+                        <span id="nameerr" class="text-danger"></span><br>
+                        <label for="">OFFER</label>
+                        <input type="text" name="Offer" id="Offer" class="form-control" >
+                        
+                        
+
+                    <button type="submit" class="btn btn-success mt-4" onclick="return validation()">submit
+                      
+                    </button>
+
+
+                    </form>
+              </div>
+      
+      </div>
+    </div>
+</section>
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
+<script>
+    var errorName = document.getElementById('nameerr')
+    var errorcategory = document.getElementById('categoryy')
+    
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorName.innerHTML = 'Alphanets are only allowed'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+
+    }
+    
+    function validation() {
+        if (!validateName() || !validateCategory() || !validateDiscription() || !validPrice()) {
+            return false
+        }
+        return true
+    }
+</script>
+
+
+

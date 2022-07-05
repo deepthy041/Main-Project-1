@@ -1,0 +1,129 @@
+
+
+
+
+    <main>
+  <!--================login_part Area =================-->
+        <section class="login_part section_padding ">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="login_part_text text-center">
+                            <div class="login_part_text_iner">
+                                <h2>Admin</h2>
+                                <p>There are advances being made in science and technology
+                                    everyday, and a good example of this is the</p>
+                                <a href="#" class="btn_3">WELCOME</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="login_part_form">
+                            <div class="login_part_form_iner">
+                                <h3>Welcome Back ! <br>
+                                   </h3>
+                                <form class="row contact_form" action="/admin/signin" method="post" >
+                                 {{#if adminErr}}
+                                      <p class="error">Invalid username or password </p>
+                               {{/if}}
+                                    <div class="col-md-12 form-group p_star">
+                                        <input type="text" class="form-control" id="Email" name="Email" value=""
+                                            placeholder="Email" onkeyup="validEmail()">
+                                            <span id="emailerr" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-12 form-group p_star">
+                                        <input type="password" class="form-control" id="password" name="password" value=""
+                                            placeholder="Password" onkeyup="validPassowrd()">
+                                            <span id="passworderr" class="text-danger"></span>
+                                    </div>
+                                    {{!-- <div class="col-md-12 form-group">
+                                        <div class="creat_account d-flex align-items-center">
+                                            <input type="checkbox" id="f-option" name="selector">
+                                        
+                                        </div> --}}
+                                       <button type="submit"  class="btn_3"> 
+                                            log in
+                                        </button></a>
+                                      
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================login_part end =================-->
+    </main>
+      <script>
+    var errorName = document.getElementById('nameerr')
+    var errorEmail = document.getElementById('emailerr')
+    var errorPassword = document.getElementById('passworderr')
+    var errorNumber=document.getElementById('numberr')
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorName.innerHTML = 'Alphanets are only allowed'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+
+    }
+    function validEmail() {
+        const email= document.getElementById('Email').value
+        if (email == "") {
+            errorEmail.innerHTML = "enter you email address"
+            return false
+
+
+        }
+        if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+            errorEmail.innerHTML = 'enter a proper email adress'
+            return false
+        }
+
+        errorEmail.innerHTML = null
+        return true
+    }
+
+    function validPassowrd() {
+        const password = document.getElementById('Password').value
+        if (password == "") {
+            errorPassword.innerHTML = "enter a password"
+            return false
+        }
+        if (password.length < 3) {
+            errorPassword.innerHTML = "password should be more than three characters"
+            return false
+        }
+        errorPassword.innerHTML = null
+        return true
+    }
+     function validNumber() {
+        const number = document.getElementById('Number').value
+        if (number == "") {
+            errorNumber.innerHTML = "enter your Number"
+            return false
+        }
+        if (!number.match(/^\d{10}$/)) {
+            errorNumber.innerHTML = 'Number should be 10'
+            return false
+        }
+        errorNumber.innerHTML = null
+        return true
+    }
+
+
+    function validation() {
+        if (!validateName() || !validEmail() || !validPassowrd()) {
+            return false
+        }
+        return true
+    }
+</script>

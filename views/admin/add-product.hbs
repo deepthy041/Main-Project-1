@@ -1,0 +1,137 @@
+<section>
+    <div class="container">
+      <div class="row">
+          
+              <div class="col-md-12">
+                  <h2 class="text-center">Add Product</h2>
+                    <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+                        <label for="">Name</label>
+                        <input type="text" name="Name" class="form-control" id="Name" onkeyup="validateName()">
+                        <span id="nameerr" class="text-danger"></span>
+                        {{!-- <label for="">Category</label> --}}
+                        <div style="color:black" class="mt-2 mb-3 ">
+                        <label  for="largeSelect" class="form-label">Category</label>
+                        <select  id="largeSelect" name="category" class="form-select form-select-lg" onkeyup="validCategory()">
+                            
+                        {{!-- <span id="categoryy" class="text-danger"></span> --}}
+                        
+                         {{#each catagory}}
+                          
+                          <option value="{{this.Name}}">{{this.Name}}</option>
+                
+                            {{/each}}
+                          
+                        
+                        </select>
+
+                      </div>
+                        
+                        <label for="">Actual Price</label>
+                        <input type="text" name="price" class="form-control" id="price" onkeyup="validPrice()">
+                        <span id="priceee" class="text-danger"></span>
+                         {{!-- <label for="">Discounted Price</label> 
+                         <input type="text" name="disprice" class="form-control" id="price" onkeyup="validdPrice()">
+                        <span id="pricee" class="text-danger"></span>  --}}
+
+                        <label for="">Description</label>
+                        <input type="text" name="Description" id="Description" class="form-control">
+                        <span id="discription" class="text-danger"></span>
+                        <label for="">Image</label>
+                       
+                        <input type="file" name="Image" class="form-control" id="formfile" multiple onchange="viewImage(event)">
+
+                    <button type="submit" class="btn btn-success mt-4" onclick="return validation()">submit
+                      
+                    </button>
+
+                    </form>
+   
+              </div>
+      
+      </div>
+    </div>
+</section>
+<script defer src="https://cdn.crop.guide/loader/l.js?c=HXKLYS"></script>
+
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
+<script>
+    var errorName = document.getElementById('nameerr')
+    var errorcategory = document.getElementById('categoryy')
+    var errorprice = document.getElementById('priceee')
+    var errordisprice = document.getElementById('pricee')
+   
+    function validateName() {
+        const name = document.getElementById('Name').value;
+        if (name == "") {
+            errorName.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorName.innerHTML = 'Alphanets are only allowed'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+
+    }
+    function validCategory() {
+        const name = document.getElementById('category').value;
+        if (name == "") {
+           errorcategory.innerHTML = 'Enter your category'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z]*$/)) {
+            errorcategory.innerHTML = 'Alphanets are only allowed'
+            return false
+        }
+        errorName.innerHTML = null
+        return true
+
+    }
+
+
+   
+     function validPrice() {
+        const number = document.getElementById('price').value
+        if (number == "") {
+            errorprice.innerHTML = "enter your price"
+            return false
+        }
+        if (!number.match <4) {
+            errorprice.innerHTML = 'Number should be valid'
+            return false
+        }
+        errorNumber.innerHTML = null
+        return true
+    }
+
+      function validdPrice() {
+        const number = document.getElementById('disprice').value
+        if (number == "") {
+            errorprice.innerHTML = "enter your price"
+            return false
+        }
+        if (!number.match(/^\d{10}$/)) {
+            errorprice.innerHTML = 'Number should be valid'
+            return false
+        }
+        errorNumber.innerHTML = null
+        return true
+    }
+
+
+
+    function validation() {
+        if (!validateName() || !validateCategory() || !validateDiscription() || !validPrice()) {
+            return false
+        }
+        return true
+    }
+</script>
+
+
+

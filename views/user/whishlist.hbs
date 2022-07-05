@@ -1,0 +1,111 @@
+
+  <main>
+      <!-- Hero Area Start-->
+      
+      <!--================Cart Area =================-->
+      <section class="cart_area section_padding">
+        <div class="container">
+          <div class="cart_inner">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Option</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each whishlist}}
+                  
+                 
+                  <tr>
+                    
+                    <td>
+                      <div class="media">
+                      
+                        <div class="d-flex">
+                        <img src="/productimages/{{this.product.images.[0]}}" alt="">
+                        </div>
+                        <div class="media-body">
+                          <p>{{this.product.Name}}</p>
+                        </div>
+                        <td>
+                      <h5>Rs.{{this.product.price}}</h5>
+                    </td>
+                      </div>
+                    </td>
+                    
+                    
+                  
+                    <div>
+                      
+                    </div>
+                    <td>
+                    <button class="btn btn-danger" onclick="removeItem('{{this._id}}','{{this.product._id}}')">Remove</button>
+                    </td>
+                  </tr>
+              {{/each}}
+                  <tr class="bottom_button">
+                    <td>
+                      <a class="btn_1" href="#">Update Cart</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <div class="cupon_text float-right">
+                        
+                        <a class="btn_1" href="/place-order">Place Order</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                   
+                  </tr>
+                 
+      </section>
+      <!--================End Cart Area =================-->
+  </main>
+  
+<script>
+function addToWishList(proId) {
+  $.ajax({
+    url: "/add-to-wishlist/" + proId,
+    method: "post",
+    success: (response) => {
+      console.log(response);
+      if (response.status === true) {
+        let count = $("#wishlist-count").html();
+        count = parseInt(count) + 1;
+        $("#wishlist-count").html(count);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Added to wishlist',
+          showConfirmButton: false,
+          timer: 850
+        })
+      } else if (response.status === 'exist') {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Product already exist',
+          showConfirmButton: false,
+          timer: 800
+        })
+      }
+      else {
+        window.location.href = "/login";
+      }
+    },
+  });
+}
+
+</script>
+        
+             

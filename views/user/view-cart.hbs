@@ -1,0 +1,200 @@
+
+  <main>
+      <!-- Hero Area Start-->
+      
+      <!--================Cart Area =================-->
+
+        <div  class="container">
+          <div class="cart_inner">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Option</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each singleAmount}}
+                  
+                 
+                  <tr>
+                    
+                    <td>
+                      <div class="media">
+                      
+                        <div class="d-flex">
+                          <img src="/productimages/{{this.product.images.[0]}}" alt="" >
+                        </div>
+                        <div class="media-body">
+                          <p>{{this.product.Name}}</p>
+                        </div>
+                        <td>
+                      <h5>Rs.{{this.product.price}}</h5>
+                    </td>
+                      </div>
+                    </td>
+                
+                    <td>
+                      <div>
+                         
+                          <button style="color: black;" class="cart-item-count mr-3"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}','{{this.product.Name}}',{{this.product.price}},-1)">-</button>
+                           <span id="{{this.product._id}}">{{this.quantity}}</span>         
+                          <button style="color:black ;" class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}','{{this.product.Name}}',{{this.product.price}},1)">+</button>
+                      </div>
+                    </td>
+                    <div>
+                      <td>
+                      <p><span id="{{this.product.Name}}">{{this.total}}</span></p>
+                      </td>
+                    </div>
+                    <td>
+                    <button class="btn btn-danger" onclick="removeItem('{{this._id}}','{{this.product._id}}')">Remove</button>
+                    </td>
+                  </tr>
+              {{/each}}
+                  
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      
+                      <h5>Total Amount:</h5>
+                      <h5>Coupon DisCount:</h5>
+                      
+                    </td>
+                    <td>
+                      
+                       <h5>Rs.<span id='total'>{{totalvalues}}</span></h5>
+                      <h5>Rs.<span id="discount">{{totalValue}}</span></h5>
+                     
+                      {{!-- <h5>Rs.<span id="finalAmount"></span></h5> --}}
+                      
+                    </td>
+                  </tr>
+                  <tr class="bottom_button">
+                    {{!-- <td>
+                      <a class="btn_1" href="#">Update Cart</a>
+                    </td> --}}
+                    <td></td>
+                    <td></td>
+                     <td>
+                      <div class="coupons" >
+                        <p class="form-coupon" id="couponee"></p>
+                      <form id="checkout-coupon">
+                        
+                      
+                      <div class="cupon_text float-left">
+                         {{!-- <input type="text" name="Addcoupon" ><br> --}}
+                        
+                        <input type="text" name="Coupon" placeholder="apply coupon">
+                        <input class="btn_1" type="submit" value="Apply">
+                         {{!-- <a class="btn_1"  href="/add-coupon">Add coupon</a> --}}
+                       
+                      </div>
+                      </div>
+                      </form>
+                      </td> 
+                     <td>
+                       
+                     </td>
+                    <td>
+                       
+                     
+                    </td>
+                    <td>
+                    
+                      
+                      <div class="cupon_text float-right">
+
+                        <a class="btn_1" href="/place-order">Place Order</a>
+                      </div>
+                    </td>
+                    <td>
+                      
+                      </td>
+                  </tr>
+                 
+      </section>
+      <!--================End Cart Area =================-->
+  </main>
+  
+
+        <script>
+          function changeQuantity(cartId,proId,userId,name,price,count){
+            
+            let quantity=parseInt(document.getElementById(proId).innerHTML)
+            
+            count=parseInt(count)
+            
+            $.ajax({
+              url:'/change-product-quantity',
+              data:{
+                user:userId,
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
+              },
+              method:'post',
+              success:(response)=>{
+                if(response.removeProduct){
+                  alert("Product removed from cart")
+                  location.reload()
+                }else{
+                    document.getElementById(name).innerHTML=price*(quantity+count)
+                    document.getElementById(proId).innerHTML=quantity+count
+                    document.getElementById('total').innerHTML=response.total
+                }
+              }
+            })
+          }
+
+        function removeItem(cartId,proId){
+        $.ajax({
+          url:'/remove-item',
+          data:{
+            cart:cartId,
+            product: proId
+          },
+          method:'post',
+          success:(response)=>{
+            if(response.removeProduct){
+              alert("Cart Item deleted")
+              location.reload()
+            }
+          }
+        })
+        }
+      
+
+$("#checkout-coupon").submit((e)=>{
+  e.preventDefault()
+  $.ajax({
+    url:'/add-coupon',
+    method:'post',
+    data:$("#checkout-coupon").serialize(),
+    success:(response)=>{
+      if(response.INVALIDCOUPON){
+        alert("Coupon is Invalid")
+   location.reload()
+      }
+      else if(response.Alreadyusedcoupon){
+        alert("Coupon already used")
+      }
+      else{
+      document.getElementById('total').innerHTML=response.total
+      }
+    }
+  })
+})
+
+
+        </script>      
+
+             

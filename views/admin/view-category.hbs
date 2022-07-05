@@ -1,0 +1,89 @@
+
+
+<section>
+    <div class="container">
+        <div class="row m-5">
+            
+          <a href="/admin/add-category"> <button class="btn btn-success">Add category</button></a>
+        </div>
+        <table class="table m-5" id="tab">
+  <thead>
+    <tr>
+   
+      <th scope="col">No:</th>
+      <th scope="col">Name of category</th>
+      {{!-- <th scope="col">offers</th>
+      <th scope="col">update offers</th> --}}
+      {{!-- <th scope="col">Image</th> --}}
+      <th scope="col">Offer</th>
+      <th scope="col">Update Offer</th>
+
+      <th scope="col">Option</th>
+      {{!-- <th scope="col">Password</th>
+      <th scope="col">Status</th>
+      <th scope="col">Remove</th>
+       --}}
+    </tr>
+  </thead>
+  <tbody>
+      {{#each catagory}}
+    <tr>
+    
+    
+      {{!-- <th scope="row">1</th> --}}
+      {{!-- <td>
+        {{#if_eq this.status 'active'}}
+        <div style="width: 50px;height:50px ; background-color:rgb(14, 255, 14)" ></div>
+        {{else}}
+        
+        <div style="width: 50px;height:50px ; background-color:rgb(255, 7, 7)" ></div>
+        {{/if_eq}}
+      </td> --}}
+       <th scope="row">{{@index}}</th>
+       <td>{{this.Name}}</td>
+      <td>Rs.{{this.Offer}}</td>
+      <td>
+      <button onclick="Update('{{this.Name}}')" class="btn btn-success">Update Offer</button></td>
+            {{!-- <td><a href="/admin/updateoffers/{{this.Name}}" class="btn btn-success " onclick="Update('{{this.Name}}')">Update Offers</a></td>
+       --}}
+  {{!-- <td>{{this.offers}}%</td> --}}
+      {{!-- <td><a href="/admin/updateoffers/{{this.Name}}" class="btn btn-success">Update Offers</a></td> --}}
+      {{!-- <td>{{this.Password}}</td>
+      <td> {{this.status}}</td> --}}
+      <td>
+       <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
+       <a href="/admin/delete-category/{{this._id}}" onclick="return confirm('do you want to delete {{this.Name}}')" class="btn btn-danger">Delete</a>
+       </td>
+       
+       
+       
+    </tr>
+     {{/each}}
+  </tbody>
+</table>
+    </div>
+</section>
+<script>
+
+function Update(catId){
+    $.ajax({
+    url: "/admin/updateoffers/" + catId,
+    method: "get",
+   
+    success:(response)=>{
+      if(response.status= true){
+        Swal.fire(
+          'Good job!',
+         'Update Added!',
+           'success'
+).then(()=>{
+  location.reload()
+})
+      }
+
+    }
+     })
+}
+  </script>
+
+

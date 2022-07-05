@@ -1,0 +1,58 @@
+<section>
+  <div class="container">
+    <div class="row mt-4">
+      <a href="/admin/all-users">Add Users</a>
+    </div>
+    <table class="table mt-5" id="productTable">
+      <thead>
+        <tr>
+          <th scope="col">NO:</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          {{!-- <th scope="col">Password</th> --}}
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <th scope="row">{{@index}}</th>
+          <td>{{this.Name}}</td>
+          <td>{{this.Email}}</td>
+          <td>{{#if status}}
+            <span class="badge bg-label-primary me-1">active</span>
+            {{else}}
+            <span class="badge bg-label-primary me-1">blocked</span>
+            {{/if}}
+          </td>
+          {{!-- <td>{{this.password}}</td> --}}
+
+          <td>
+            {{#if status}}
+            <a href="/admin/block-user/{{this._id}}" class="btn btn-primary"
+              onclick="return confirm('Are you sure to block {{this.Name}}?')">Block</a>
+            {{else}}
+            <a href="/admin/unblock-user/{{this._id}}" class="btn btn-primary"
+              onclick="return confirm('Are you sure to unblock {{this.Name}}?')">UnBlock</a>
+            {{/if}}
+            </td>
+          <td>
+            <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger"
+              onclick="return confirm('Are you want to delete')">Delete</a>
+
+          </td>
+
+          
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+  $(document).ready(function () {
+    $('#productTable').DataTable();
+  });
+
+</script>

@@ -1,0 +1,102 @@
+<div class="main-panel">
+   
+          <div class="content-wrapper">
+            
+
+
+
+            <div class="page-header">
+              
+              <h3 class="page-title"> Basic Tables </h3>
+               <div class="mt-2">
+      
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  action="/admin/coupon" method="post">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Coupon Name</label>
+            <input type="text" name="couponName" class="form-control" id="coupon-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Coupon Code</label>
+              <input type="text" name="couponCode" class="form-control" id="coupon-code">
+            
+          </div>
+            <div class="form-group">
+            <label for="message-text" class="col-form-label">Offer</label>
+             <input type="text" name="couponOffer" class="form-control" id="coupon-offer">
+           
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Added Date</label>
+             
+            <input type="date" name="StartDate" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Expiry Date</label>
+            <input type="date" name="EndDate" class="form-control" >
+           
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add Coupon</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+      </div>
+            
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Coupon</h4>
+                    
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            
+                            <th>Coupon Name</th>
+                            <th>Coupon Code</th>
+                            <th>Coupon Offer</th>
+                            <th>Start Date</th>
+                            <th>Expiry Date</th>
+                          </tr>
+                        </thead>
+                        {{#each coupon}}
+                        <tbody>
+                          <tr>
+                            <td>{{this.couponName}}</td>
+                            <td>{{this.couponCode}}</td>
+                            <td>{{this.couponOffer}}</td>
+                            <td>{{this.StartDate}}</td>
+                            <td>{{this.EndDate}}</td>
+                           
+                          </tr>
+                          
+                        </tbody>
+                        {{/each}}
+                      </table>
+                      
+                    </div>
+                    
+                  </div>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add coupon</button>
+                </div>
+              </div>
+              

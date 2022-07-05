@@ -1,0 +1,277 @@
+<main>
+
+  <div class="container  mt-5">
+    <div class="row mt-4">
+      <a href="/address-view" class="btn btn-success ml-auto mb-5 col-2">Add Address</a>
+    </div>
+
+    <div>
+      <h3 style="text-align:center">SHIPPING DETAILS</h3>
+    </div>
+
+
+    {{!-- <div class="">
+      <input class="form-check-input" type="radio" name="checkoutAddress" onclick="selectAddress('{{this._id}}')">
+    </div> --}}
+ <form class="row contact_form mt-5" id="checkout-form" method="post">
+    {{#each user.address}}
+  
+  
+ 
+   
+      <div class="card-body ">
+
+
+
+        <div class="inside">
+          <div class="container" style="max-width: 800px;" style="color:black;">
+
+
+
+
+  <div class="card">
+  <div class="card-body shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card-body">
+              {{!-- <p class="card-text" style="font-weight: bolder; font-size: large; color: black;">
+                {{user.name}}
+              </p> --}}
+              <div class="">
+                <input class="form-check-input" type="radio" name="checkoutAddress"
+                  onclick="selectAddress('{{@index}}')">
+
+              </div>
+
+
+              <p class="card-text">{{this.name}}</p>
+              <p class="card-text">{{this.mobile}}</p>
+              <p class="card-text">{{this.email}}</p>
+              <p class="card-text">{{this.address}}</p>
+              <p class="card-text">{{this.city}}</p>
+              <p class="card-text">{{this.pincode}}</p>
+              {{!-- <input type="text " name="thisId" value="{{user._id}}" hidden> --}}
+            </div>
+             </div>
+</div>
+            {{!--
+    </form> --}}
+  </div>
+  
+
+  {{/each}}
+
+  <div class="class mt-5">
+    <div class="billing_details ">
+      <div class="row">
+        <div class="col-lg-8">
+
+
+          <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+          <div class="col-md-4">
+            <div class="container mt-5 ml-5 checkout">
+              <h5>Total Amount:Rs.{{total}}</h5>
+              <hr>
+              <div class="payment">
+                <p>Payment method</p>
+                <input class="form-check-input" type="radio" name="paymentmethod" value="COD" id="flexRadioDefault1"
+                  onclick="selectPayment('COD')">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  COD</label><br>
+                <input class="form-check-input" type="radio" name="paymentmethod" value="RAZORPAY" id="flexRadioDefault1"
+                  onclick="selectPayment('RAZORPAY')">
+                <label class="form-check-label" for="flexRadioDefault1">
+                 Razor-Pay </label><br>
+                 <input class="form-check-input" type="radio" name="paymentmethod" value="PAYPAL" id="flexRadioDefault1"
+                  onclick="selectPayment('PAYPAL')">
+                <label class="form-check-label" for="flexRadioDefault1">
+                 Paypal </label>
+
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn button-order col-md-10" onclick="placeOrder()">Place order</button>
+
+        </div>
+
+        </section>
+
+        </form>
+        <!--================End Checkout Area =================-->
+</main>
+<footer>
+  <!-- Footer Start-->
+  <div class="footer-area footer-padding">
+    <div class="container">
+      <div class="row d-flex justify-content-between">
+        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+          <div class="single-footer-caption mb-50">
+            <div class="single-footer-caption mb-30">
+              <!-- logo -->
+              <div class="footer-logo">
+                <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+              </div>
+              <div class="footer-tittle">
+                <div class="footer-pera">
+                  <p>Asorem ipsum adipolor sdit amet, consectetur adipisicing elitcf sed do eiusmod tem.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+          <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#"> Offers & Discounts</a></li>
+                <li><a href="#"> Get Coupon</a></li>
+                <li><a href="#"> Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+          <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+              <h4>New Products</h4>
+              <ul>
+                <li><a href="#">Woman Cloth</a></li>
+                <li><a href="#">Fashion Accessories</a></li>
+                <li><a href="#"> Man Accessories</a></li>
+                <li><a href="#"> Rubber made Toys</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+          <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+              <h4>Support</h4>
+              <ul>
+                <li><a href="#">Frequently Asked Questions</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Report a Payment Issue</a></li>
+              </ul> 
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+  <script>
+    var checkoutAddressId;
+    var PaymentMethod;
+    function selectAddress(id) {
+    
+
+      checkoutAddressId = id;
+    }
+    function selectPayment(payment) {
+      
+      PaymentMethod = payment;
+    }
+
+    function placeOrder() {
+      $("#checkout-form").submit((e) => {
+        e.preventDefault()
+
+        if (!checkoutAddressId && PaymentMethod) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please Select address to Place Order",
+          });
+        } else if (!PaymentMethod && checkoutAddressId) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please Select payment method to Place Order",
+          });
+        }
+        else if (!checkoutAddressId && !PaymentMethod) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please give address and payment method",
+          });
+        } else {
+          $.ajax({
+            url: '/place-order',
+            method: 'post',
+            data: {
+              addressid: checkoutAddressId,
+              paymentmethod: PaymentMethod
+            },
+            success: (response) => {
+
+
+              console.log(response)
+              if (response.codSuccess) {
+                location.href = "/check-out"
+              }else if(response.status=='RAZORPAY'){
+                
+                razorpayPayment(response)
+              }else{
+                for(let i = 0;i < response.links.length;i++){
+              if(response.links[i].rel === 'approval_url'){
+              location.href=response.links[i].href;
+        }
+      }
+              }
+
+            }
+          })
+        }
+      })
+      function razorpayPayment(order){
+        
+        var options = {
+    "key": "rzp_test_lylIusv0TH5GDr", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Watch Shop",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+       
+
+        verifyPayment(response,order)
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+ rzp1.open(); 
+      }
+      function verifyPayment(payment,order){
+         
+        $.ajax({
+          url:'/verify-payment',
+          data:{
+            payment,
+            order
+
+          },
+          method:"post",
+          success:(response)=>{
+            if(response.status){
+              location.href = "/check-out"
+            }else{
+              alert("payment-failed")
+            }
+          }
+        })
+      }
+    }
+  </script>
