@@ -9,6 +9,10 @@ module.exports = {
     addProduct: (body, files) => {
         body.images = files
         body.price = parseInt(body.price)
+        body.offerPrices=body. price
+        body. offerstatus=false;
+        
+        
         return new Promise(async (resolve, reject) => {
             await db.get().collection(collection.PRODUCT_COLLECTION).insertOne(body)
             resolve();
@@ -50,13 +54,18 @@ module.exports = {
     },
 
     getProductDetails: (proId) => {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve,reject) => {
             console.log("*************************************")
             console.log(proId)
             console.log("*************************************")
-            let product = await db.get().collection(collection.PRODUCT_COLLECTION).findOne({ _id: objectId(proId) })
+            try{
+                let product = await db.get().collection(collection.PRODUCT_COLLECTION).findOne({ _id: objectId(proId) })
 
-            resolve(product)
+                resolve(product)
+            }catch(error){
+                reject()
+            }
+            
         })
     },
     updateProduct: (proId, proDetails) => {
@@ -634,6 +643,22 @@ console.log(to)
         resolve(report)
 
 
+    })
+},
+removeOffer:(proId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proId)},{
+            $set:{
+                offerPrices:0,
+                offerPercentage:0,
+                DiscountPrice:0,
+                offerstatus:false,
+
+
+            }
+        }).then((response)=>{
+            resolve(response)
+        })
     })
 }
 }

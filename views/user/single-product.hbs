@@ -14,7 +14,7 @@
 
 		<div class="column">
 			<div id="img-container">
-				<div class="card">
+				<div class="card" style="width:350px;">
 					<div class="image">
 				<div id="lens"></div>
 				<img height="500" id=featured src="/productimages/{{product.images.[0]}}">
@@ -29,11 +29,21 @@
 		
 			<h1>{{product.Name}}</h1>
 			<hr>
-			<h3>Rs.{{product.price}}</h3>
+			<h3 >Rs.{{product.price}}</h3>
+      <h3>Offer.Rs.{{product.offerPrices}}</h3>
+        <h3>{{product.Description}}</h3>
+        	<button onclick="addCart('{{product._id}}')" class="btn btn-success">Add to Cart</button>
+    </div>
+    <div>
+    
+      
+    </div>
 
-			<p>{{product.Description}}</p>
 			
-			<a class="btn btn-dark" href="/add-cart">Add to Cart</a>
+      
+		
+			{{!-- <a class="btn btn-dark" href="/add-cart">Add to Cart</a> --}}
+
          </div>
 		 
 		 </div>

@@ -1,0 +1,249 @@
+<main>
+  <!-- Hero Area Start-->
+
+  <!--================Cart Area =================-->
+
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            {{#if products}}
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Option</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            
+
+
+            {{#each singleAmount}}
+
+
+            <tr>
+
+              <td>
+                <div class="media">
+
+                  <div class="d-flex">
+                    <img src="/productimages/{{this.product.images.[0]}}" alt="">
+                  </div>
+                  <div class="media-body">
+                    <p>{{this.product.Name}}</p>
+                  </div>
+              <td>
+               
+                <h5>{{this.product.offerPrices}}</h5>
+
+              </td>
+      </div>
+      </td>
+
+      <td>
+        
+        <div>
+
+          <button style="color: black;" class="cart-item-count mr-3"
+            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}','{{this.product.Name}}',{{this.product.offerPrices}},-1)">-</button>
+          <span id="{{this.product._id}}">{{this.quantity}}</span>
+          <button style="color:black ;" class="cart-item-count mr-3"
+            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}','{{this.product.Name}}',{{this.product.offerPrices}},1)">+</button>
+        </div>
+
+       
+      </td>
+      <div>
+        <td>
+         
+          <p><span id="{{this.product.Name}}">{{this.total}}</span></p>
+         
+        </td>
+      </div>
+      <td>
+        <button class="btn btn-danger" onclick="removeItem('{{this._id}}','{{this.product._id}}')">Remove</button>
+      </td>
+      </tr>
+      {{/each}}
+      {{else}}
+      <h2 class="text-danger">Cart doesn't have any item</h2>
+      {{/if}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          {{#if products}}
+
+          <h5>Total Amount: Rs.<span id='total'>{{totalValue}}</span></h5>
+
+          {{/if}}
+{{!-- 
+          <h5>Coupon DisCount:Rs. {{totalValue}} </h5> --}}
+
+
+
+
+
+
+
+
+
+        </td>
+        <td>
+
+
+          {{!-- {{#ifcond offerstatus 'true'}} --}}
+
+
+
+
+          {{!-- <h5>Rs.<span id="finalAmount"></span></h5> --}}
+          {{!-- {{/cond}} --}}
+        </td>
+      </tr>
+      <tr class="bottom_button">
+        {{!-- <td>
+          <a class="btn_1" href="#">Update Cart</a>
+        </td> --}}
+        <td></td>
+        <td></td>
+        <td>
+          {{#if products}}
+          <div class="coupons">
+            <p class="form-coupon" id="couponee"></p>
+            <div class="cupon_text float-left">
+              {{!-- <input type="text" name="Addcoupon"><br> --}}
+
+              <input type="text" name="Coupon" placeholder="apply coupon" id="coupon">
+              <button class="btn btn-primary" type="button" onclick="addCoupon('id')"> apply</button>
+  
+              {{!-- <a class="btn_1" href="/add-coupon">Add coupon</a> --}}
+
+            </div>
+          </div>
+          {{/if}}
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+
+        </td>
+        <td>
+
+
+          <div class="cupon_text float-right">
+            {{#if products}}
+            <a class="btn_1" href="/place-order">Place Order</a>
+            {{/if}}
+          </div>
+        </td>
+        <td>
+
+        </td>
+      </tr>
+
+      </section>
+      </div>
+      <!--================End Cart Area =================-->
+</main>
+
+
+
+<script>
+  function changeQuantity(cartId, proId, userId, name, offerPrices, count) {
+    console.log("ayayayooo")
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+
+    count = parseInt(count)
+    console.log("ayyoo vannille")
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+        console.log(response)
+        console.log("haiiiii")
+        if (response.removeProduct) {
+          alert("Product removed from cart")
+          location.reload()
+        } else {
+          if (response.total) {
+
+            document.getElementById(name).innerHTML = offerPrices * (quantity + count)
+            document.getElementById(proId).innerHTML = quantity + count
+
+            document.getElementById('total').innerHTML = response.total
+
+          } else {
+
+            document.getElementById(name).innerHTML = offerPrices * (quantity + count)
+            document.getElementById(proId).innerHTML = quantity + count
+
+            document.getElementById('total').innerHTML = response.total
+          }
+
+
+        }
+      }
+    })
+  }
+
+
+  function removeItem(cartId, proId) {
+    $.ajax({
+      url: '/remove-item',
+      data: {
+        cart: cartId,
+        product: proId
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.removeProduct) {
+          alert("Cart Item deleted")
+          location.reload()
+        }
+      }
+    })
+  }
+
+
+  function addCoupon(id) {
+  let data = document.getElementById("coupon").value
+    $.ajax({
+      url: '/add-coupon',
+      method: 'post',
+      data: { coupon: data },
+    
+      success: (response) => {
+        console.log(response)
+        if (response.INVALIDCOUPON) {
+          alert("Coupon is Invalid")
+          
+        }
+        else if (response.Alreadyusedcoupon) {
+          alert("Coupon already used")
+        }
+        else {
+         
+          location.reload()
+        }
+      }
+    })
+
+  }
+
+
+</script>

@@ -3,37 +3,150 @@
         <div class="col-md-3 border-right">
 
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
-                    width="150px"
-                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                    class="font-weight-bold">Deepthy</span><span
-                    class="text-black-50">prasaddeepthy9@gmail.com</span><span> </span></div>
-            
+                    width="150px" <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar"
+                    class="img-fluid my-5" style="width: 80px;" />
+                <span class="font-weight-bold">{{users.Name}}</span><span
+                    class="text-black-50">{{users.Email}}</span><span> </span>
+            </div>
+      
+            {{!-- <div class="d-flex mt-1 px-5">
+                <h5></h5>
+            </div> --}}
+
+
+
+            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-header">Wallet</div>
+                <div class="card-body">
+                    <div class="d-flex mt-1 px-4 ">
+                        <h4 style="color:#e7ffab ;"> Balance:Rs.{{users.wallet}}</h4>
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
 
 
 
+
         <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
+            <div class="p-3 py-5" style="background-color: white; height: 500px;width:500px; overflow:auto">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                {{#if user}}
+                {{#if userr}}
                 <div class="row mt-2">
                     <div class="col-md-12">
                         <p>Name:{{user.address.[0].name}} </p>
-                        <p>Address:{{user.address.[0].email}} </p>
-                        <p>Address:{{user.address.[0].mobile}} </p>
+                        <p>Mobile:{{user.address.[0].number}} </p>
+                        <p>Email:{{user.address.[0].Email}} </p>
+
                         <p>Address:{{user.address.[0].address}} </p>
-                        <p>Address:{{user.address.[0].city}} </p>
-                        <p>Address:{{user.address.[0].pincode}} </p>
+                        <p>City:{{user.address.[0].city}} </p>
+                        <p>pincode:{{user.address.[0].pincode}} </p>
+
+                       
 
 
+                        
                     </div>
-
-
-
                 </div>
+
+
+
                 {{/if}}
+                <hr>
+
+                {{#each users.address}}
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <p>Name:{{this.name}} </p>
+                        <p>Mobile:{{this.number}} </p>
+                        <p>Email:{{this.Email}} </p>
+
+                        <p>Address:{{this.address}} </p>
+                        <p>City:{{this.city}} </p>
+                        <p>pincode:{{this.pincode}} </p>
+                    </div>
+                </div>
+   <button class="btn btn-class"  data-toggle="modal"   data-target="#a{{@index}}"  >Edit</button> 
+
+ <a href="/delete-address/{{this.addressId}}" class="btn btn-danger"
+                                onclick="return confirm('Are you want to delete')">Delete</a>
+<div class="modal fade" id="a{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form action="/user-addressEdit/{{this.addressId}}" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Name</label>
+                                    <input type="text" class="form-control" name="name" value="{{name}}">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone no:</label>
+                                    <input type="number" class="form-control" name="number"
+                                        value="{{number}}">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" name="Email"
+                                        aria-describedby="emailHelp" value="{{Email}}">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> Address</label>
+                                    <input type="text" class="form-control" name="address" value="{{address}}">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">City</label>
+                                    <input type="text" class="form-control" name="city" value="{{city}}">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Pincode</label>
+                                    <input type="pincode" class="form-control" name="pincode" value="{{pincode}}">
+                                </div>
+                              
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+
+                            </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+                <hr>
+
+
+                
+                {{/each}}
+
+                {{!-- <div class="col-md-4 gradient-custom text-center text-white"
+                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+
+                    <h4>Wallet Balance:Rs.{{userprofile.wallet}}</h4>
+                    <i class="far fa-edit mb-5"></i>
+
+
+                </div> --}}
                 {{!-- <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control"
                             placeholder="country" value=""></div>
@@ -43,32 +156,112 @@
 
             </div>
         </div>
+
+
+
         <div class="col-md-4">
+
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Address</span><span
-                        class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;PROFILE</span></div>
+                <div class="d-flex justify-content-between align-items-center experience"><span>OPTIONS</span>
+                    {{!-- class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;PROFILE</span></div>
+                --}}
                 <br>
-                        </div>
-                        <div class="cupon_text ">
-
-                <a   class="btn_1 col-md-12" href="/profile-orders">orders</a>
-
-            </div><br>
-            <div class="cupon_text ">
-
-                <a class="btn_1 col-md-12" href="/change-password">Change Password</a>
-            </div><br>
-            <div class="cupon_text ">
-
-                <a class="btn_1 col-md-12" href="/addprofile-address">Add Address</a>
             </div>
+            <div class="cupon_text ">
+
+                <a class="btn_1 col-sm-6" style="background: #00050a;padding: 10px 25px;"
+                    href="/profile-orders">orders</a>
+
+            </div><br>
+            <div class="cupon_text ">
+
+                <a class="btn_1 col-sm-6" style="padding: 10px 16px;background: #00050a" href="/change-password">Change
+                    Password</a>
+            </div><br>
+            {{!-- <div class="cupon_text ">
+
+                <a class="btn_1 col-sm-6" style="padding: 10px 25px;background: #00050a" href="/addprofile-address">Add
+                    Address</a>
+            </div> --}}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn_1 col-sm-6" style="padding: 10px 25px;background: #00050a"
+                data-toggle="modal" data-target="#exampleModalCenter">
+                Add Address
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/user-profileaddress" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Enter name">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Phone no:</label>
+                                    <input type="number" class="form-control" name="number"
+                                        placeholder="Enter PhoneNo:">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" name="Email"
+                                        aria-describedby="emailHelp" placeholder="Enter email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> Address</label>
+                                    <input type="text" class="form-control" name="address" placeholder="Enter Address">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">City</label>
+                                    <input type="text" class="form-control" name="city" placeholder="Enter city">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Pincode</label>
+                                    <input type="pincode" class="form-control" name="pincode" placeholder="Password">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
     </div>
-</div>
 </div>
 
 <style>
     body {
-        background: rgb(99, 39, 120)
+        background: rgb(196, 166, 147)
     }
 
     .form-control:focus {
@@ -83,7 +276,7 @@
     }
 
     .profile-button:hover {
-        background: #682773
+        background: #e9103f
     }
 
     .profile-button:focus {

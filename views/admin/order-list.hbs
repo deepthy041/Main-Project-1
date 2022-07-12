@@ -1,156 +1,145 @@
+<div class="col-lg-12 stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Table with contextual classes</h4>
 
+      <div class="table-responsive">
+        <table class="table table-bordered table-contextual">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
 
+              <th>Address</th>
+              <th>Pincode</th>
+              <th>Payment Method</th>
+              <th>Product</th>
+              <th>Total Price</th>
+              {{!-- <th>Product</th> --}}
+              <th>Status</th>
+              <th>Option</th>
 
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orders}}
+            <tr>
 
+              <td>{{this.date}}</td>
+              <td>{{this.deliveryDetails.name}}</td>
 
+              <td>{{this.deliveryDetails.address}}</td>
+              <td>{{this.deliveryDetails.pincode}}</td>
+              <td>{{this.paymentMethod}}</td>
+              <td> {{#each product}}
+                {{this.Name}}
+                {{/each}}</td>
+              <td>{{this.totalAmount}}</td>
+              {{!-- {{#each product}}
+              <td>{{poduct.Name}}</td>
+              {{/each}} --}}
+              {{#ifCompare status 'cancelled'}}
+              <td>
+                <div id={{this._id}}>{{status}}</div>
+              </td>
+              {{else}}
+              {{#ifCompare status 'shipped'}}
+              <td>
+                <div id={{this._id}}>{{status}}</div>
+              </td>
+              {{else}}
+              {{#ifCompare status 'delivered'}}
+              <td>
+                <div id={{this._id}}>{{status}}</div>
+              </td>
+              {{else}}
+              {{#ifCompare status 'placed'}}
+              <td>
+                <div id={{this._id}}>{{status}}</div>
+              </td>
+              {{else}}
+              <td>
+                <div id={{this._id}}>{{status}}</div>
+              </td>
+              {{/ifCompare}}
+              {{/ifCompare}}
+              {{/ifCompare}}
+              {{/ifCompare}}
+              <td>
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Click here</button>
+                      <div class="dropdown-menu">
+                        {{#ifCompare status 'cancelled' }}
+                        {{!-- <button type="submit" class="btn button-order  "
+                          onclick="deliverOrder('{{this._id}}')">deliver</button><br>
+                        <button type="submit" class="btn button-order "
+                          onclick="shipOrder('{{this._id}}')">Ship</button><br> --}}
+                        {{!-- <button type="submit" class="btn button-order"
+                          onclick="cancelOrder('{{this._id}}')">cancel</button> --}}
+                        {{else}}
+                        {{#ifCompare status 'shipped' }}
+                        <button type="submit" class="btn button-order  "
+                          onclick="deliverOrder('{{this._id}}')">deliver</button><br>
+                        {{!-- <button type="submit" class="btn button-order "
+                          onclick="shipOrder('{{this._id}}')">Ship</button><br> --}}
+                        <button type="submit" class="btn button-order"
+                          onclick="cancelOrder('{{this._id}}')">cancel</button>
+                        {{else}}
+                        {{#ifCompare status 'delivered' }}
+                        {{!-- <button type="submit" class="btn button-order  "
+                          onclick="deliverOrder('{{this._id}}')">delivered</button><br> --}}
+                        {{!-- <button type="submit" class="btn button-order "
+                          onclick="shipOrder('{{this._id}}')">Ship</button><br>
+                        <button type="submit" class="btn button-order"
+                          onclick="cancelOrder('{{this._id}}')">cancel</button> --}}
+                          {{else}}
+                           {{#ifCompare status 'placed' }}
+                        <button type="submit" class="btn button-order  "
+                          onclick="deliverOrder('{{this._id}}')">deliver</button><br>
+                        <button type="submit" class="btn button-order"
+                          onclick="shipOrder('{{this._id}}')">Ship</button><br>
+                        <button type="submit" class="btn button-order"
+                          onclick="cancelOrder('{{this._id}}')">cancel</button>
+                       {{else}}
+                       {{#ifCompare status 'pending' }}
+                        {{!-- <button type="submit" class="btn button-order  "
+                          onclick="deliverOrder('{{this._id}}')">deliver</button><br> --}}
+                        {{!-- <button type="submit" class="btn button-order"
+                          onclick="shipOrder('{{this._id}}')">Ship</button><br> --}}
+                        <button type="submit" class="btn button-order"
+                          onclick="cancelOrder('{{this._id}}')">cancel</button>
+                        {{/ifCompare}}
+                        {{/ifCompare}}
+                        {{/ifCompare}}
+                        {{/ifCompare}}
+                        {{/ifCompare}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              <div class="col-lg-12 stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Table with contextual classes</h4>
-                   
-                    <div class="table-responsive">
-                      <table class="table table-bordered table-contextual">
-                        <thead>
-                          <tr>
-                             <th>Date</th>
-                                    <th>Name</th>
-                                    
-                                    <th>Address</th>
-                                    <th>Pincode</th>
-                                    <th>Payment Method</th>
-                                    <th>Product</th>
-                                    <th>Total Price</th>
-                                    {{!-- <th>Product</th> --}}
-                                    <th>Status</th>
-                                    <th>Option</th>
-                                    
-                          </tr>
-                        </thead>
-                        <tbody>
-                           {{#each orders}}
-        <tr>
-        
-          <td>{{this.date}}</td>
-          <td>{{this.deliveryDetails.name}}</td>
-          
-          <td>{{this.deliveryDetails.address}}</td>
-          <td>{{this.deliveryDetails.pincode}}</td>
-          <td>{{this.paymentMethod}}</td>
-          <td> {{#each product}}
-            {{this.Name}}
-          {{/each}}</td>
-          <td>{{this.totalAmount}}</td>
-         {{!-- {{#each product}}
-          <td>{{poduct.Name}}</td>
-          {{/each}} --}}
-          <td>{{this.status}}</td>
-          <td>
-           <div class="form-group">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Click here</button>
-                          <div class="dropdown-menu">
-                            <button  type="submit" class="btn button-order  " onclick="deliverOrder('{{this._id}}')">deliver</button><br>
-                            <button type="submit" class="btn button-order " onclick="shipOrder('{{this._id}}')">Ship</button><br>
-                            <button type="submit" class="btn button-order" onclick="cancelOrder('{{this._id}}')">cancel</button>
-                           
-                          </div>
-                        </div>
-                        
                       </div>
-                    </div>
-            </td>
 
-
-          
-            {{!-- <a href="/view-order-product/{{this._id}}" class="btn btn-primary">View Products</a> --}}
-            {{!-- <td><span>{{this.status}}</span> <span> <i class="bi bi-pencil-square btn" id="edit"
-                                            onclick="editStatus('{{this._id}}')"></i> </span> </td> --}}
-           
-          
-
-        </tr>
-        {{/each}}
-                          
-                        </tbody>
-                      </table>
                     </div>
                   </div>
-                </div>
-              </div>
+              </td>
 
 
 
+              {{!-- <a href="/view-order-product/{{this._id}}" class="btn btn-primary">View Products</a> --}}
+              {{!-- <td><span>{{this.status}}</span> <span> <i class="bi bi-pencil-square btn" id="edit"
+                    onclick="editStatus('{{this._id}}')"></i> </span> </td> --}}
 
 
 
+            </tr>
+            {{/each}}
 
-
-
-
-
-
-
-
-
-
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -159,50 +148,50 @@
 
 
 <style>
-    body {
-        margin-top: 0px;
-        color: #1a202c;
-        text-align: left;
-        background-color: rgba(5, 3, 3, 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305);
-    }
-    </style>
-    <script>
-    function cancelOrder(orderId){
-      
-      $.ajax({
-         url:'/admin/cancel-order/'+orderId,
-        method:'get',
-        success:(response)=>{
-           if(response.status){
-             location.reload()
-            }
+  body {
+    margin-top: 0px;
+    color: #1a202c;
+    text-align: left;
+    background-color: rgba(5, 3, 3, 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305), 0.305);
+  }
+</style>
+<script>
+  function cancelOrder(orderId) {
+
+    $.ajax({
+      url: '/admin/cancel-order/' + orderId,
+      method: 'get',
+      success: (response) => {
+        if (response.status) {
+          location.reload()
         }
-      })
-    }
-    function deliverOrder(orderId){
-      $.ajax({
-        url:'/admin/deliver-order/'+orderId,
-        method:'get',
-        success:(response)=>{
-          if(response.status){
-            location.reload()
-          }
+      }
+    })
+  }
+  function deliverOrder(orderId) {
+    $.ajax({
+      url: '/admin/deliver-order/' + orderId,
+      method: 'get',
+      success: (response) => {
+        if (response.status) {
+          location.reload()
         }
+      }
 
-      })
+    })
 
-    }
-      function shipOrder(orderId){
-      $.ajax({
-        url:'/admin/ship-order/'+orderId,
-        method:'get',
-        success:(response)=>{
-          if(response.status){
-            location.reload()
-          }
+  }
+  function shipOrder(orderId) {
+    $.ajax({
+      url: '/admin/ship-order/' + orderId,
+      method: 'get',
+      success: (response) => {
+        if (response.status) {
+          location.reload()
         }
+      }
 
-      })
+    })
 
-    }
-    </script>
+  }
+</script>

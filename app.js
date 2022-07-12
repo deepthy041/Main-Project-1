@@ -23,6 +23,15 @@ next();
 // view engine setup
 app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/'}))
+
+const HBS = hbs.create({});
+HBS.handlebars.registerHelper("ifCompare", function (v1, v2, options) {
+  if (v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
@@ -31,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(fileUpload())
-app.use(session({secret:"Key",cookie:{maxAge:600000}}))
+app.use(session({secret:"Key",cookie:{maxAge:6000000}}))
 db.connect((err)=>{
 if(err){
   console.log("Error"+err);
@@ -56,7 +65,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('user/error');  
 });
 
 module.exports = app;

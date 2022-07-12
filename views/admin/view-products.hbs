@@ -6,180 +6,190 @@
           <a href="/admin/view-products" class="btn btn-success ml-auto mb-5 col-2">Add Product</a>
         </div>
 
-          <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card ">
-                  <div class="card-body col-md-12">
-                    <h4 class="card-title">Striped Table</h4>
-                    
-                    <div class="table-responsive">
-                      <table class="table table-striped"   id="productTable">
-                        <thead>
-                          <tr>
-                         <th scope="col">NO:</th>
-              <th scope="col">Name</th>
-              <th scope="col">Category</th>
-             
-              {{!-- <th scope="col">Description</th> --}}
-              <th scope="col">Price</th>
-              <th scope="col">Image</th>
-              <th>Options</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {{#each products}}
-            <tr>
-              <th scope="row">{{@index}}</th>
-              <td>{{this.Name}}</td>
-              <td>{{this.category}}</td>
-              <td></td>
-              {{!-- <td>{{this.Description}}</td> --}}
-              <td>Rs.{{this.price}}</td>
-              <td><img style="width:75px;height:75px" src="/productimages/{{this.images.[0]}}"></td>
-              <td>
-                <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
-                <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
-                  onclick="return confirm('Are you want to delete')">Delete</a>
+        <div class="col-lg-8 grid-margin stretch-card">
+          <div class="card ">
+            <div class="card-body col-md-12">
+              <h4 class="card-title">Product Table</h4>
 
+              <div class="table-responsive">
+                <table class="table table-striped" id="productTable">
+                  <thead>
+                    <tr>
+                      <th scope="col">NO:</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Category</th>
+
+                      {{!-- <th scope="col">Description</th> --}}
+                      <th scope="col">Price</th>
+                      <th scope="col">Image</th>
+                      <th>Options</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each products}}
+                    <tr>
+                      <th scope="row">{{@index}}</th>
+                      <td>{{this.Name}}</td>
+                      <td>{{this.category}}</td>
+                      <td></td>
+                      {{!-- <td>{{this.Description}}</td> --}}
+                      <td>Rs.{{this.price}}</td>
+                      <td><img style="width:75px;height:75px" src="/productimages/{{this.images.[0]}}"></td>
+                      <td>
+                        <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+                        <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                          onclick="return confirm('Are you want to delete')">Delete</a>
+
+                      </td>
+
+                      <td>
+                        <!-- Button trigger modal -->
+                        {{#if offerstatus}}
+                        
+                        <button type="button" class="btn btn-primary"  onclick="removeOffer('{{this._id}}')">
+                          Remove
+                        </button>
+                        {{else}}
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#b{{this._id}}">
+                          Add offer
+                        </button>
+                        {{/if}}
+
+
+                        <!-- Modal -->
+              </div>
               </td>
+              </tr>
+              {{/each}}
 
-              <td>
-                <!-- Button trigger modal -->
-                {{#if offerstatus}}
-                <button type="button" class="btn btn-primary">
-                  Remove
-                </button>
-                {{else}}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#b{{this._id}}">
-                  Add offer
-                </button>
-                {{/if}}
+              </tbody>
+              </table>
+              {{#each products}}
+  <div class="modal fade" id="b{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-                <!-- Modal -->
-                 </div>
-              </td>
-            </tr>
-            {{/each}}
-            {{#each products}}
-            <div class="modal fade" id="b{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-body">
+          <form action="/admin/applyoffer/{{this._id}}" method="post">
+            <label for="category">Category</label>
+            <select class="custom-select tm-select-accounts" id="category" name="offer">
+              <option selected>Select category</option>
+              {{#each ../offers }}
+              <option value="{{this._id}}">{{this.name}}</option>
+
+              {{/each}}
+
+            </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
       </div>
-      
-      <div class="modal-body">
-        <form action="/admin/applyoffer/{{this._id}}" method="post" >
-        <label for="category">Category</label>
-                            <select class="custom-select tm-select-accounts" id="category" name="offer">
-                              <option selected>Select category</option>
-                              {{#each ../offers }}
-                              <option value="{{this._id}}">{{this.name}}</option>
-
-                              {{/each}}
-
-                            </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-      </form>
     </div>
   </div>
-</div>
 
-            {{/each}}
-
-        </table>
-      </div><br>
-      <div class="col-6 left-right ">
-
-        <table class="table table-hover table-dark">
-          <thead>
-
-            <tr>
-              {{!-- <th scope="col">#</th> --}}
-              <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Offer</th>
-            </tr>
-          </thead>
-          {{#each offers}}
-          <tbody>
-            <tr>
-              <th scope="row">{{@index}}</th>
-              <td>{{this.name}}</td>
-              <td>{{this.offer}}%</td>
-
-            </tr>
-
-          </tbody>
-          {{/each}}
-                          
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-
-
-
-
-
-       
-         
-
-
-
-
-      <button type="button" class="btn btn-primary " style="text-align: center;" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Place Offer</button>
-      {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@fat">Open modal for @fat</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@getbootstrap">Open modal for @getbootstrap</button> --}}
-
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form method="post" action="/admin/add-offer">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Product Name:</label>
-                  <input type="text" class="form-control" id="recipient-name" name="name">
-                </div>
-                <div class="form-group">
-                  <label for="message-text" class="col-form-label">Offer:</label>
-                  <textarea class="form-control" id="message-text" name="offer"></textarea>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  {{!-- <a href="/admin/add-offer" class="btn btn-success">submit</a> --}}
-                  <button type="submit" class="btn btn-primary">submit</button></a>
-                </div>
-            </div>
-
-            </form>
+  {{/each}}
+            </div><br>
+            
           </div>
         </div>
+        <div class="col-4 left-right ">
+          <div>
+            <button type="button" class="btn btn-primary " style="text-align: center;" data-toggle="modal"
+    data-target="#exampleModal" data-whatever="@mdo">Place Offer</button>
+  {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+    data-whatever="@fat">Open modal for @fat</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+    data-whatever="@getbootstrap">Open modal for @getbootstrap</button> --}}
+    <h4 class="card-title">Offer Table</h4>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/admin/add-offer">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Product Name:</label>
+              <input type="text" class="form-control" id="recipient-name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Offer:</label>
+              <textarea class="form-control" id="message-text" name="offer"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              {{!-- <a href="/admin/add-offer" class="btn btn-success">submit</a> --}}
+              <button type="submit" class="btn btn-primary">submit</button></a>
+            </div>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+          </div>
+<div>
+   <table class="table table-hover table-dark">
+                <thead>
+
+                  <tr>
+                    {{!-- <th scope="col">#</th> --}}
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Offer</th>
+                  </tr>
+                </thead>
+                {{#each offers}}
+                <tbody>
+                  <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.offer}}%</td>
+
+                  </tr>
+
+                </tbody>
+                {{/each}}
+
+
+              </table>
+</div>
+             
+            </div>
       </div>
 
-      </tbody>
-      </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
   </div>
 </section>
@@ -189,4 +199,41 @@
     $('#productTable').DataTable();
   });
 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function removeOffer(proId){
+    alert("helo")
+    $.ajax({
+      
+      url:'/admin/removeOffer/'+proId,
+      method:'get',
+
+      success:(response)=>{
+        if(response.status){
+          location.reload()
+        }
+      }
+    })
+  }
 </script>

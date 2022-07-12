@@ -37,12 +37,11 @@
                     <li>
                       <p>Quantity</p><span>:{{this.quantity}}</span>
                     </li>
+                     
+                  <li>
 
                   {{/each}}
-                  <li>
-                      <p>Price</p><span>:{{this.totalAmount}}</span>
-                    </li>
-                  <li>
+                 
                     <p>Date</p><span>: {{orders.date}}</span>
                   </li>
                   <li>
@@ -54,7 +53,11 @@
                   <li>
                     <p>Mobile</p><span>: {{orders.deliveryDetails.mobile}}</span>
                   </li>
-                  <li>
+                 
+                    <li>
+                      <p>Price</p><span>: {{orders.totalAmount}}</span>
+                    </li>
+                     <li>
                     <p>pincode</p><span>: {{orders.deliveryDetails.pincode}}</span>
                   </li>
                   <li>

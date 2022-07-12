@@ -89,10 +89,14 @@ if(!req.session.adminSignin){
 res.redirect('/admin')
 }
 else{
-  let totalsale = await  productHelpers.totalSale()
-  let paypal=await productHelpers.totalPaypal()
-  let cod=await productHelpers.totalCod()
-  let razorpay=await productHelpers.totalRazorpay()
+  let totalsales = await  productHelpers.totalSale()
+  let totalsale=Math.round(totalsales)
+  let paypals=await productHelpers.totalPaypal()
+  let paypal=Math.round(paypals)
+  let cods=await productHelpers.totalCod()
+  let cod=Math.round(cods)
+  let razorpays=await productHelpers.totalRazorpay()
+  let razorpay=Math.round(razorpays)
   let dailysale=await productHelpers.getDailySale()
   console.log("dailysale")
   console.log(dailysale)
@@ -183,6 +187,13 @@ router.post('/add-offer',(req,res)=>{
   res.redirect('/admin/view-products')
 })
 
+// router.get('/remove-offer/:id', (req, res) => {
+//   deleteId = req.params.id;
+//   let id=req.session.userData._id
+//   userHelpers.deleteOffer(deleteId,id).then((response) => {
+//     res.redirect('/user-profile')
+//   })
+// })
 
 
 
@@ -219,7 +230,7 @@ router.post('/edit-product/:id',(req,res)=>{
   let editid=req.params.id
   console.log("hhhhhhhhhhhhhhhhhhhh");
 
-  productHelpers.updateProduct(editid,req.body).then((data)=>{
+  productHelpers.updateProduct(req.params.id,req.body).then((data)=>{
     console.log(editid);
     if(req.files){
       let image=req.files.Image
@@ -422,6 +433,8 @@ router.post('/applyoffer/:id',(req,res)=>{
   })
 
 })
+router
+
 router.get('/updateoffers/:data',(req,res)=>{
   console.log(req.params);
   productHelpers.updateOffers(req.params).then(()=>{
@@ -461,4 +474,13 @@ router.post('/coupon',(req,res)=>{
 //   })
  
 // })
+router.get('/removeOffer/:id',(req,res)=>{
+  console.log(req.params.id)
+  productHelpers.removeOffer(req.params.id).then((response)=>{
+    response.status=true
+    res.json(response);
+  })
+})
+
+
 module.exports = router;

@@ -11,10 +11,10 @@
                     <input type="text" name="category" class="form-control" id="category" value="{{product.category}}" onkeyup="validateCategory()">
                     <span id="categoryy" class="text-danger"></span>
                     <label for="">Price</label>
-                    <input type="text" name="price" class="form-control" id="price" value="{{product.price}}" onkeyup="validPrice()">
+                    <input type="text" name="price" class="form-control" id="price" value="{{product.price}}" >
                    <span id="priceee" class="text-danger"></span>
                     <label for="">Description</label>
-                    <input type="text" name="Description" class="form-control" id="Description" value="{{product.Description}}" onkeyup="validateDiscription()">
+                    <input type="text" name="Description" class="form-control" id="Description" value="{{product.Description}}" >
                     <span id="discription" class="text-danger"></span>
                     <label for="">Image</label>
                     <img src="/productimages/{{product._id}}.jpg" alt="" style="width:100px ;height:auto" id="imgView"
@@ -71,34 +71,8 @@
         return true
 
     }
-function validateDiscription() {
-        const name = document.getElementById('Description').value;
-        if (name == "") {
-            errorDiscription.innerHTML = 'Enter your Discription'
-            return false
-        }
-        if (!name.match(/^[a-zA-Z]*$/)) {
-            errorDiscription.innerHTML = 'Alphanets are only allowed'
-            return false
-        }
-        errorName.innerHTML = null
-        return true
 
-    }
-     function validPrice() {
-        const number = document.getElementById('price').value
-        if (number == "") {
-            errorprice.innerHTML = "enter your price"
-            return false
-        }
-        if (!number.match(/^\d{10}$/)) {
-            errorprice.innerHTML = 'Number should be valid'
-            return false
-        }
-        errorNumber.innerHTML = null
-        return true
-    }
-
+   
 
     function validation() {
         if (!validateName() || !validateCategory() || !validateDiscription() || !validPrice()) {

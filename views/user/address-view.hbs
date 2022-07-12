@@ -1,38 +1,140 @@
 <div class="container mt-5">
    <h4>Add Address</h4>
-<form class="row contact_form mt-5" action="/address-view" method="post" id="checkout-form">
+<form class="row contact_form mt-5" action="/address-view" method="post">
                    
-                    <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="first" name="name" placeholder="Name" />
-                      
+                   <div class="col-md-6 form-group p_star">
+                                        <input type="text" class="form-control" id="name" name="name" value=""
+                                            placeholder="Name" onkeyup="validName() ">
+                                            <span id="names" class="text-danger"></span>
                     </div>
                    
-                    
                     <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="number" name="mobile"placeholder="Mobile number"  />
-                      
+                      <input type="text" class="form-control" id="number" name="number" placeholder="number" onkeyup="validPhone()" />
+                      <span id="phones" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6 form-group p_star">
-                      <input type="text" class="form-control" id="email" name="email" placeholder="Email id" />
+                    <div class="col-md-12 form-group p_star">
+                      <input type="text" class="form-control" id="Email" name="Email" placeholder="Email id" onkeyup="validEmail()" />
+      
+                         <span id="emails" class="text-danger"></span>
                       
                     </div>
                    
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="addres" name="address" placeholder="your address" />
-                      
+                      <input type="text" class="form-control" id="address" name="address" placeholder="your address"  />
+                      <span id="addresss" class="text-danger"></span>
                     </div>
                     
                     <div class="col-md-12 form-group p_star">
-                      <input type="text" class="form-control" id="city" name="city" placeholder="city" />
-                      
+                      <input type="text" class="form-control" id="city"  name="city" placeholder="city" onkeyup="validCity()"/>
+                      <span id="cityy" class="text-danger"></span>
                     </div>
                     
                     <div class="col-md-12 form-group">
-                      <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Postcode" />
+                      <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Postcode" onkeyup="validPincode()"/>
+                      <span id="pincodes" class="text-danger"></span>
                     </div>
                     <div class="col-md-12 form-group">
-                      <button type="submit" class="btn btn-success">submit</button>
+                      <button type="submit" class="btn btn-success" onclick="return validation()" >submit</button>
                     </div>
 
 </form>
 </div>
+ <script>
+    var Name = document.getElementById('names')
+    var Email = document.getElementById('emails')
+   
+    var Pincode = document.getElementById('pincodes')
+    var Phone = document.getElementById('phones')
+    var City=document.getElementById('cityy')
+
+
+    function validEmail() {
+        const email = document.getElementById('Email').value
+        if (email == "") {
+            Email.innerHTML = "enter you email address"
+            return false
+
+
+        }
+        if (!email.match(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/)) {
+            Email.innerHTML = 'enter a proper email'
+            return false
+        }
+
+        Email.innerHTML = null
+        return true
+    }
+    function validName() {
+
+        const name = document.getElementById('name').value;
+        if (name == "") {
+            Name.innerHTML = 'Enter your Name'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z\s-, ]+$/)) {
+            Name.innerHTML = 'Numbers and symbols are not allowed'
+            return false
+        }
+        Name.innerHTML = null
+        return true
+
+    }
+
+
+
+
+
+    function validPhone() {
+        const phone = document.getElementById('number').value
+        if (phone == "") {
+            Phone.innerHTML = "enter a password"
+            return false
+        }
+        if (!phone.match(/^\d{10}$/)) {
+            Phone.innerHTML = "phone number should be  10 digits "
+            return false
+        }
+        Phone.innerHTML = null
+        return true
+    }
+
+
+
+    function validPincode() {
+        const pincode = document.getElementById('pincode').value
+        if (pincode == "") {
+            Pincode.innerHTML = "enter pin number"
+            return false
+        }
+        if (!pincode.match(/^\d{6}$/)) {
+            Pincode.innerHTML = "6 digit only allowed"
+            return false
+        }
+        Pincode.innerHTML = null
+        return true
+    }
+        function validCity() {
+
+        const name = document.getElementById('city').value;
+        if (name == "") {
+            City.innerHTML = 'Enter your city'
+            return false
+        }
+        if (!name.match(/^[a-zA-Z\s-, ]+$/)) {
+            City.innerHTML = 'Numbers and symbols are not allowed'
+            return false
+        }
+        City.innerHTML = null
+        return true
+
+    }
+
+
+
+    function validation() {
+        if (!validName() || !validEmail() || !validAddress() || !validPincode() || !validPhone() || !validCity()) {
+            return false
+        } else { return true }
+
+    }
+</script>
