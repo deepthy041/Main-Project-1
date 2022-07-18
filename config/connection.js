@@ -4,7 +4,7 @@ const state={
 }
  
 module.exports.connect=function(done){
-    const url='mongodb://localhost:27017'
+    const url='mongodb+srv://Deepthyprasads:prasad@watchshop.hqcwz.mongodb.net/?retryWrites=true&w=majority'
     const dbname='watchshop'
 
     mongoClient.connect(url,(err,data)=>{
