@@ -1,277 +1,371 @@
-<main>
+<section class="h-100 gradient-custom">
+  <!-- Navbar -->
 
-  <div class="container  mt-5">
-    <div class="row mt-4">
-      <a href="/address-view" class="btn btn-success ml-auto mb-5 col-2">Add Address</a>
-    </div>
+  <!--Main layout-->
+  <main class=" pt-4">
+    <div class="container wow fadeIn">
 
-    <div>
-      <h3 style="text-align:center">SHIPPING DETAILS</h3>
-    </div>
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center">Checkout form</h2>
 
-
-    {{!-- <div class="">
-      <input class="form-check-input" type="radio" name="checkoutAddress" onclick="selectAddress('{{this._id}}')">
-    </div> --}}
- <form class="row contact_form mt-5" id="checkout-form" method="post">
-    {{#each user.address}}
-  
-  
- 
-   
-      <div class="card-body ">
-
-
-
-        <div class="inside">
-          <div class="container" style="max-width: 800px;" style="color:black;">
-
-
-
-
-  <div class="card">
-  <div class="card-body shadow-lg p-3 mb-5 bg-white rounded" >
-            <div class="card-body">
-              {{!-- <p class="card-text" style="font-weight: bolder; font-size: large; color: black;">
-                {{user.name}}
-              </p> --}}
-              <div class="">
-                <input class="form-check-input" type="radio" name="checkoutAddress"
-                  onclick="selectAddress('{{@index}}')">
-
-              </div>
-
-
-              <p class="card-text">{{this.name}}</p>
-              <p class="card-text">{{this.number}}</p>
-              <p class="card-text">{{this.Email}}</p>
-              <p class="card-text">{{this.address}}</p>
-              <p class="card-text">{{this.city}}</p>
-              <p class="card-text">{{this.pincode}}</p>
-              {{!-- <input type="text " name="thisId" value="{{user._id}}" hidden> --}}
-            </div>
-             </div>
-</div>
-            {{!--
-    </form> --}}
-  </div>
-  
-
-  {{/each}}
-
-  <div class="class mt-5">
-    <div class="billing_details ">
+      <!--Grid row-->
       <div class="row">
-        <div class="col-lg-8">
+
+        <!--Grid column-->
+        <div class="col-md-8 mb-4">
 
 
-          <input type="text" name="userId" id="" value="{{user._id}}" hidden>
-          <div class="col-md-4">
-            <div class="container mt-5 ml-5 checkout">
-              <h5>Total Amount:Rs.{{total}}</h5>
-              <hr>
-              <div class="payment">
-                <p>Payment method</p>
-                <input class="form-check-input" type="radio" name="paymentmethod" value="COD" id="flexRadioDefault1"
-                  onclick="selectPayment('COD')">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  COD</label><br>
-                <input class="form-check-input" type="radio" name="paymentmethod" value="RAZORPAY" id="flexRadioDefault1"
-                  onclick="selectPayment('RAZORPAY')">
-                <label class="form-check-label" for="flexRadioDefault1">
-                 Razor-Pay </label><br>
-                 <input class="form-check-input" type="radio" name="paymentmethod" value="PAYPAL" id="flexRadioDefault1"
-                  onclick="selectPayment('PAYPAL')">
-                <label class="form-check-label" for="flexRadioDefault1">
-                 Paypal </label>
 
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn button-order col-md-10" onclick="placeOrder()">Place order</button>
+          <!--Card-->
+          <div class="card p-1">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"
+              data-whatever="@mdo" style="background: #fff;border: radius 5px; color:#fff;background-color: rgb(50, 38, 38);max-width: 175px;">Add Address</button>
 
-        </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/address-view" method="post">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter name">
 
-        </section>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Phone no:</label>
+                        <input type="number" class="form-control" name="number" placeholder="Enter PhoneNo:">
 
-        </form>
-        <!--================End Checkout Area =================-->
-</main>
-<footer>
-  <!-- Footer Start-->
-  <div class="footer-area footer-padding">
-    <div class="container">
-      <div class="row d-flex justify-content-between">
-        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-          <div class="single-footer-caption mb-50">
-            <div class="single-footer-caption mb-30">
-              <!-- logo -->
-              <div class="footer-logo">
-                <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-              </div>
-              <div class="footer-tittle">
-                <div class="footer-pera">
-                  <p>Asorem ipsum adipolor sdit amet, consectetur adipisicing elitcf sed do eiusmod tem.</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="Email"
+                          aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                          anyone else.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1"> Address</label>
+                        <input type="text" class="form-control" name="address" placeholder="Enter Address">
+
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">City</label>
+                        <input type="text" class="form-control" name="city" placeholder="Enter city">
+
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Pincode</label>
+                        <input type="pincode" class="form-control" name="pincode" placeholder="Password">
+                      </div>
+                      <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+
+                    </form>
+                  </div>
+
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-          <div class="single-footer-caption mb-50">
-            <div class="footer-tittle">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#"> Offers & Discounts</a></li>
-                <li><a href="#"> Get Coupon</a></li>
-                <li><a href="#"> Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-          <div class="single-footer-caption mb-50">
-            <div class="footer-tittle">
-              <h4>New Products</h4>
-              <ul>
-                <li><a href="#">Woman Cloth</a></li>
-                <li><a href="#">Fashion Accessories</a></li>
-                <li><a href="#"> Man Accessories</a></li>
-                <li><a href="#"> Rubber made Toys</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-          <div class="single-footer-caption mb-50">
-            <div class="footer-tittle">
-              <h4>Support</h4>
-              <ul>
-                <li><a href="#">Frequently Asked Questions</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Report a Payment Issue</a></li>
-              </ul> 
-            </div>
-          </div>
-        </div> 
-      </div>
-    </div>
-  </div>
-  <script>
-    var checkoutAddressId;
-    var PaymentMethod;
-    function selectAddress(id) {
-    
 
-      checkoutAddressId = id;
-    }
-    function selectPayment(payment) {
-      
-      PaymentMethod = payment;
-    }
-
-    function placeOrder() {
-      $("#checkout-form").submit((e) => {
-        e.preventDefault()
-
-        if (!checkoutAddressId && PaymentMethod) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please Select address to Place Order",
-          });
-        } else if (!PaymentMethod && checkoutAddressId) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please Select payment method to Place Order",
-          });
-        }
-        else if (!checkoutAddressId && !PaymentMethod) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Please give address and payment method",
-          });
-        } else {
-          $.ajax({
-            url: '/place-order',
-            method: 'post',
-            data: {
-              addressid: checkoutAddressId,
-              paymentmethod: PaymentMethod
-            },
-            success: (response) => {
+            <!--Card content-->
+            <form class="card-body" id="checkout-form" method="post" style="height:500px;" >
 
 
-              console.log(response)
-              if (response.codSuccess) {
-                location.href = "/check-out"
-              }else if(response.status=='RAZORPAY'){
+
+
+              {{!-- <div class="row mt-4">
+                <a href="/address-view" class="btn btn-success ml-auto mb-5 col-2">Add Address</a>
+              </div> --}}
+
+
+
+              {{!-- <div class="">
+                <input class="form-check-input" type="radio" name="checkoutAddress"
+                  onclick="selectAddress('{{this._id}}')">
+              </div> --}}
+              
+              <div class="card-body shadow-lg p-3 mb-5 bg-white rounded " style="height: 450px; overflow:auto;">
+                {{#each user.address}}
+
                 
-                razorpayPayment(response)
-              }else{
-                for(let i = 0;i < response.links.length;i++){
-              if(response.links[i].rel === 'approval_url'){
-              location.href=response.links[i].href;
-        }
-      }
-              }
+                  <input  style="margin-left:1px;" type="radio" name="checkoutAddress"
+                    onclick="selectAddress('{{@index}}')">
 
-            }
-          })
-        }
-      })
-      function razorpayPayment(order){
-        
-        var options = {
-    "key": "rzp_test_lylIusv0TH5GDr", // Enter the Key ID generated from the Dashboard
-    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Watch Shop",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
-       
+                <br>
 
-        verifyPayment(response,order)
-    },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
- rzp1.open(); 
+
+                <p class="card-text">{{this.name}}</p>
+                <p class="card-text">{{this.number}}</p>
+                <p class="card-text">{{this.Email}}</p>
+                <p class="card-text">{{this.address}}</p>
+                <p class="card-text">{{this.city}}</p>
+                <p class="card-text">{{this.pincode}}</p>
+
+                <hr>
+
+                {{/each}}
+
+              </div>
+              <hr>
+
+
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!-- Heading -->
+
+          <div class="input-group">
+
+            <div class="input-group-append">
+              {{!-- <buttonclass="btn_1 col-sm-6" style="background: #bcd4eb;padding: 10px 124px;">Add address</button>
+                --}}
+
+
+
+
+
+
+            </div>
+          </div>
+          <br>
+
+
+          <!-- Cart -->
+          <ul class="list-group mb-3 z-depth-2">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Amount</h6>
+                {{!-- <small class="text-muted">Brief description</small> --}}
+              </div>
+              {{!-- <span class="text-muted">$12</span> --}}
+            </li>
+            {{!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Second product</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+              <span class="text-muted">$8</span>
+            </li> --}}
+            {{!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Total Amount</h6>
+                <small class="text-muted">Brief description</small>
+              </div>
+           
+            </li> --}}
+            {{!-- <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">-$5</span>
+            </li> --}}
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total </span>
+              <strong>  Rs:<span class="text-muted">{{total}}</span></strong>
+            </li>
+          </ul>
+          <!-- Cart -->
+
+          <!-- Promo code -->
+          <div style="background-color:white;">
+          <div  class="text-center ">
+
+            <h6 class="pt-3" >PAYMENT METHODS</h6>
+          </div>
+
+
+          <hr>
+
+          <div class="d-block my-3 pl-3" >
+            <div class="custom-control custom-radio">
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input"
+                onclick="selectPayment('COD')" checked required>
+              <label class="custom-control-label" for="credit">COD</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"
+                onclick="selectPayment('RAZORPAY')" required>
+              <label class="custom-control-label" for="debit">Razor-Pay</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"
+                onclick="selectPayment('PAYPAL')" required>
+              <label class="custom-control-label" for="paypal">Paypal</label>
+            </div>
+          </div>
+          
+
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" style="background-color:rgb(50, 38, 38);" type="submit"
+            onclick="placeOrder()">PLACE ORDER</button>
+            </div>
+
+          </form>
+
+          <!-- Promo code -->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+</section>
+<!--Footer-->
+<!--/.Footer-->
+<script>
+  new WOW().init();
+</script>
+<style>
+  .gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199))
+  }
+</style>
+
+<script>
+  var checkoutAddressId;
+  var PaymentMethod;
+  function selectAddress(id) {
+
+
+    checkoutAddressId = id;
+  }
+  function selectPayment(payment) {
+
+    PaymentMethod = payment;
+  }
+
+  function placeOrder() {
+    $("#checkout-form").submit((e) => {
+      e.preventDefault()
+
+      if (!checkoutAddressId && PaymentMethod) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please Select address to Place Order",
+        });
+      } else if (!PaymentMethod && checkoutAddressId) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please Select payment method to Place Order",
+        });
       }
-      function verifyPayment(payment,order){
-         
+      else if (!checkoutAddressId && !PaymentMethod) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please give address and payment method",
+        });
+      } else {
         $.ajax({
-          url:'/verify-payment',
-          data:{
-            payment,
-            order
-
+          url: '/place-order',
+          method: 'post',
+          data: {
+            addressid: checkoutAddressId,
+            paymentmethod: PaymentMethod
           },
-          method:"post",
-          success:(response)=>{
-            if(response.status){
+          success: (response) => {
+
+
+            console.log(response)
+            if (response.codSuccess) {
               location.href = "/check-out"
-            }else{
-              alert("payment-failed")
+            } else if (response.status == 'RAZORPAY') {
+
+              razorpayPayment(response)
+            } else {
+              for (let i = 0; i < response.links.length; i++) {
+                if (response.links[i].rel === 'approval_url') {
+                  location.href = response.links[i].href;
+                }
+              }
             }
+
           }
         })
       }
+    })
+    function razorpayPayment(order) {
+
+      var options = {
+        "key": "rzp_test_lylIusv0TH5GDr", // Enter the Key ID generated from the Dashboard
+        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Watch Shop",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response) {
+
+
+          verifyPayment(response, order)
+        },
+        "prefill": {
+          "name": "Gaurav Kumar",
+          "email": "gaurav.kumar@example.com",
+          "contact": "9999999999"
+        },
+        "notes": {
+          "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
     }
-  </script>
+    function verifyPayment(payment, order) {
+
+      $.ajax({
+        url: '/verify-payment',
+        data: {
+          payment,
+          order
+
+        },
+        method: "post",
+        success: (response) => {
+          if (response.status) {
+            location.href = "/check-out"
+          } else {
+            alert("payment-failed")
+          }
+        }
+      })
+    }
+  }
+</script>

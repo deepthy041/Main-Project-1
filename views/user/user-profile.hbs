@@ -1,193 +1,148 @@
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
+<section class="h-100 gradient-custom">
+    <div class="container py-5   ">
 
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
-                    width="150px" <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar"
-                    class="img-fluid my-5" style="width: 80px;" />
-                <span class="font-weight-bold">{{users.Name}}</span><span
-                    class="text-black-50">{{users.Email}}</span><span> </span>
-            </div>
-      
-            {{!-- <div class="d-flex mt-1 px-5">
-                <h5></h5>
-            </div> --}}
+        <div class="row d-flex justify-content-center align-items-center ">
 
+            <div class="col col-lg-6 mb-4 mb-lg-0">
 
+                <div class="card mb-3" style="border-radius:.5rem;">
+                    <div class="row g-0">
 
-            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Wallet</div>
-                <div class="card-body">
-                    <div class="d-flex mt-1 px-4 ">
-                        <h4 style="color:#e7ffab ;"> Balance:Rs.{{users.wallet}}</h4>
-                    </div>
-
-                </div>
-            </div>
+                        <div class="col-md-4 gradient-custom text-center text-white shadow-lg"
+                            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background:#9a8fa9;">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                            <h3>{{users.Name}}</h3>
+                            <h4>Wallet Balance:Rs.{{users.wallet}}</h4>
+                            {{!-- <i class="far fa-edit mb-5"></i> --}}
 
 
-        </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+                                <h2>User Information</h2>
 
-
-
-
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5" style="background-color: white; height: 500px;width:500px; overflow:auto">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
-                </div>
-                {{#if userr}}
-                <div class="row mt-2">
-                    <div class="col-md-12">
-                        <p>Name:{{user.address.[0].name}} </p>
-                        <p>Mobile:{{user.address.[0].number}} </p>
-                        <p>Email:{{user.address.[0].Email}} </p>
-
-                        <p>Address:{{user.address.[0].address}} </p>
-                        <p>City:{{user.address.[0].city}} </p>
-                        <p>pincode:{{user.address.[0].pincode}} </p>
-
-                       
-
-
-                        
-                    </div>
-                </div>
-
-
-
-                {{/if}}
-                <hr>
-
-                {{#each users.address}}
-                <div class="row mt-2">
-                    <div class="col-md-12">
-                        <p>Name:{{this.name}} </p>
-                        <p>Mobile:{{this.number}} </p>
-                        <p>Email:{{this.Email}} </p>
-
-                        <p>Address:{{this.address}} </p>
-                        <p>City:{{this.city}} </p>
-                        <p>pincode:{{this.pincode}} </p>
-                    </div>
-                </div>
-   <button class="btn btn-class"  data-toggle="modal"   data-target="#a{{@index}}"  >Edit</button> 
-
- <a href="/delete-address/{{this.addressId}}" class="btn btn-danger"
-                                onclick="return confirm('Are you want to delete')">Delete</a>
-<div class="modal fade" id="a{{@index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <form action="/user-addressEdit/{{this.addressId}}" method="post">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{name}}">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Phone no:</label>
-                                    <input type="number" class="form-control" name="number"
-                                        value="{{number}}">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" name="Email"
-                                        aria-describedby="emailHelp" value="{{Email}}">
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                                        anyone else.</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1"> Address</label>
-                                    <input type="text" class="form-control" name="address" value="{{address}}">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">City</label>
-                                    <input type="text" class="form-control" name="city" value="{{city}}">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Pincode</label>
-                                    <input type="pincode" class="form-control" name="pincode" value="{{pincode}}">
-                                </div>
-                              
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-
-                            </form>
-      </div>
-      
-    </div>
-  </div>
+                                <div>
+    <h6>Name<span>:</span>{{users.Name}}</h6>
+    <h6>Email<span>:</span>{{users.Email}}</h6>
+    <h6>Phone.no<span>:</span>{{users.Number}}</h6>
 </div>
-                <hr>
+<hr>
+
+                                <div class="row pt-1">
+                                    {{!-- Add Money --}}
+                                    {{!-- <div class="col-4 mb-3"> --}}
+                                        {{!-- modal button --}}
+                                        {{!-- <button type="button" class="btn"
+                                            style="background-color: rgb(101, 100, 117);color: #fff;"
+                                            data-toggle="modal" data-target="#exampleModal">
+                                            Add Money
+                                        </button>
+
+                                        <!-- Modal -->
+
+                                        <form action="/user/add-money" method="post">
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h2>Enter the amount to Wallet</h2>
+
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+
+                                                                <span aria-hidden="true">&times;</span>
+
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <label class="labels"></label><input type="number"
+                                                                name="amount" class="form-control"
+                                                                placeholder="Enter the Amount" value="">
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Add
+                                                                Money</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form> --}}
 
 
-                
-                {{/each}}
+                                        {{!-- modal button end --}}
+                                        {{!--
+                                    </div> --}}
 
-                {{!-- <div class="col-md-4 gradient-custom text-center text-white"
-                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                        alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                                    {{!-- modal button --}}
 
-                    <h4>Wallet Balance:Rs.{{userprofile.wallet}}</h4>
-                    <i class="far fa-edit mb-5"></i>
+                                    {{!-- <button type="button" class="btn-success "
+                                        style="background: #2577fd;width: 100px;border: unset;border-radius: 4px;height: 39px"
+                                        data-bs-toggle="modal" data-bs-target="#myModal">Edit</button> --}}
+                                    {{!-- <form action="/user/edit-userprofile/{{user._id}}" method="post">
+                                        <div class="modal" id="myModal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Contact Us</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <div class="mb-3">
+                                                            <label class="form-label required">Name</label>
+                                                            <input type="text" name="name" value="{{users.Name}}"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label required">Email</label>
+                                                            <input type="email" name="email" value="{{users.Email}}"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label required">Phone</label>
+                                                            <input type="tel" name="number"
+                                                                value="{{userprofile.number}}" class="form-control">
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Update
+                                                            profile</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form> --}}
+
+                                    {{!-- modal button end --}}
+
+                                    <div class="mt-2">
+                                       <a href="/change-password"> 
+                                       <button type="button" class=" btn-primary"
+                                            style="background: #2577fd;width: 215px;border: unset;border-radius: 5px;height: 47px"
+                                            >
+                                            Change Password
+                                        </button></a>
+
+                                        <!-- Modal -->
+                                        
+                                    </div>
+                                    <div class="mt-2">
 
 
-                </div> --}}
-                {{!-- <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control"
-                            placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text"
-                            class="form-control" value="" placeholder="state"></div>
-                </div> --}}
-
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>OPTIONS</span>
-                    {{!-- class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;PROFILE</span></div>
-                --}}
-                <br>
-            </div>
-            <div class="cupon_text ">
-
-                <a class="btn_1 col-sm-6" style="background: #00050a;padding: 10px 25px;"
-                    href="/profile-orders">orders</a>
-
-            </div><br>
-            <div class="cupon_text ">
-
-                <a class="btn_1 col-sm-6" style="padding: 10px 16px;background: #00050a" href="/change-password">Change
-                    Password</a>
-            </div><br>
-            {{!-- <div class="cupon_text ">
-
-                <a class="btn_1 col-sm-6" style="padding: 10px 25px;background: #00050a" href="/addprofile-address">Add
-                    Address</a>
-            </div> --}}
-            <!-- Button trigger modal -->
-            <button type="button" class="btn_1 col-sm-6" style="padding: 10px 25px;background: #00050a"
-                data-toggle="modal" data-target="#exampleModalCenter">
-                Add Address
-            </button>
+                                         <button type="button" class=" btn-primary"
+                                            style="background: #2577fd;width: 215px;border: unset;border-radius: 5px;height: 47px"
+                                            data-toggle="modal"data-target="#exampleModalCenter">
+                                           Add Address
+                                        </button>
+            
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -195,7 +150,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add address</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -249,59 +204,42 @@
                     </div>
                 </div>
             </div>
+            <div class="mt-2">
+                                   
+                                         <a  href="/useraddress-view"><button  class="btn-primary" style="background: #2577fd;width: 215px;border: unset;border-radius: 5px;height: 47px">view Address</button>
+                                         </a> 
+                                    
+                                  
+                                
+                                </div>
+            <div>
+                                
+                                </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                
 
+                                <div class="row pt-1">
+                                     <div class="mt-2">
+                                   
+                                         <a  href="/profile-orders"><button  class="btn-primary" style="background: #2577fd;width: 215px;border: unset;border-radius: 5px;height: 47px">view orders</button>
+                                         </a> 
+                                    
+                                  
+                                
+                                </div>
 
+                                    <style>
+                                        .gradient-custom {
+                                            /* fallback for old browsers */
+                                            background: #6a11cb;
 
+                                            /* Chrome 10-25, Safari 5.1-6 */
+                                            background: -webkit-linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199));
 
-
-        </div>
-
-    </div>
-</div>
-
-<style>
-    body {
-        background: rgb(196, 166, 147)
-    }
-
-    .form-control:focus {
-        box-shadow: none;
-        border-color: #BA68C8
-    }
-
-    .profile-button {
-        background: rgb(99, 39, 120);
-        box-shadow: none;
-        border: none
-    }
-
-    .profile-button:hover {
-        background: #e9103f
-    }
-
-    .profile-button:focus {
-        background: #682773;
-        box-shadow: none
-    }
-
-    .profile-button:active {
-        background: #682773;
-        box-shadow: none
-    }
-
-    .back:hover {
-        color: #682773;
-        cursor: pointer
-    }
-
-    .labels {
-        font-size: 11px
-    }
-
-    .add-experience:hover {
-        background: #BA68C8;
-        color: #fff;
-        cursor: pointer;
-        border: solid 1px #BA68C8
-    }
-</style>
+                                            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                                            background: linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199))
+                                        }
+                                    </style>

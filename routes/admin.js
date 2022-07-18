@@ -145,24 +145,7 @@ router.get('/add-product',async function(req,res){
     res.render('admin/add-product',{admin:true,catagory})
   } 
 })
-// router.get('/add-product',controller.add);
 
-// router.post('/add-product',(req,res)=>{
- 
-//   productHelpers.addProduct(req.body,(id)=>{
-//     let image=req.files.Image
-//     console.log(id);
-//     image.mv('./public/product-images/'+id+'.jpg',(err)=>{
-//       if(!err){
-//         res.redirect("/admin")
-//       }else{
-//         console.log(err)
-//       }
-
-//     })
-   
-//   })
-// })
 router.post('/add-product',productImgStore.array('Image',12),function(req,res){
   let arr=[]
     req.files.forEach(function (files, index, ar) {
@@ -186,14 +169,6 @@ router.post('/add-offer',(req,res)=>{
  
   res.redirect('/admin/view-products')
 })
-
-// router.get('/remove-offer/:id', (req, res) => {
-//   deleteId = req.params.id;
-//   let id=req.session.userData._id
-//   userHelpers.deleteOffer(deleteId,id).then((response) => {
-//     res.redirect('/user-profile')
-//   })
-// })
 
 
 
@@ -274,19 +249,7 @@ router.get('/delete-user/:id', (req, res) => {
     res.redirect('/admin/all-users')
   })
 })
-// router.get('/edit-user/:id',async (req,res)=>{
-//   let users=await productHelpers.getUserDetails(req.params.id)
-//   console.log(users);
-//   res.render('admin/edit-user',{users})
-// })
-// router.post('/edit-user/:id',(req,res)=>{
-//   console.log(req.params.id);
-//   let id=req.params.id
-//   productHelpers.updateUser(req.params.id,req.body).then(()=>{
-//     res.redirect('/admin')
-  
-//   })
-// })
+
 
 router.get('/block-user/:id',(req,res)=>{
   let id = req.params.id
@@ -314,22 +277,7 @@ router.get('/add-category', (req, res) => {
 })
 
 
-// router.post('/add-category',(req,res)=>{
- 
-//   productHelpers.category(req.body,(id)=>{
-//     let image=req.files
-//     console.log(id);
-//     image.mv('./public/productimages/'+id+'.jpg',(err)=>{
-//       if(!err){
-//         res.redirect("/admin/view-category")
-//       }else{
-//         console.log(err)
-//       }
 
-//     })
-   
-//   })
-// })
 
 router.post('/add-category',categoryImgStore.array('Image',5),function(req,res){
   let arr=[]
@@ -403,7 +351,7 @@ router.get('/cancel-order/:id',(req,res)=>{
   console.log(req.params.id);
 
   productHelpers.cancelOrder(req.params.id).then(()=>{
-    // res.redirect('admin/order-list')
+
     res.json({status:true})
   })
 })
@@ -417,13 +365,7 @@ router.get('/ship-order/:id',(req,res)=>{
     res.json({status:true})
   })
 })
-//.............Dashboard..................//
-// router.get('/admin-home',async(req,res)=>{
-//   let dailysale= await productHelpers.getDailySale()
-//   let monthlysale=await productHelpers.getMonthlySale()
-//   let yearlysale=await productHelpers.getYearlySale()
-  
-// })
+
 //..........category offer................//
 
 
@@ -438,7 +380,7 @@ router
 router.get('/updateoffers/:data',(req,res)=>{
   console.log(req.params);
   productHelpers.updateOffers(req.params).then(()=>{
-    // res.send("Updated Successfully")
+
     res.json({status:true})
   })
 })
@@ -465,15 +407,8 @@ router.post('/coupon',(req,res)=>{
 })
 
 
-//...........sales report...........//
-// router.post('/admin-home',async(req,res)=>{
-  
-//   productHelpers.getSaleReport(From,To).then(()=>{
-//     res.render('admin/admin-home', )
 
-//   })
- 
-// })
+
 router.get('/removeOffer/:id',(req,res)=>{
   console.log(req.params.id)
   productHelpers.removeOffer(req.params.id).then((response)=>{

@@ -2,75 +2,67 @@ var db = require('../config/connection')
 var collection = require('../config/collections')
 const async = require('hbs/lib/async')
 const { report } = require('../app')
-// const { reject } = require('bcrypt/promises')
-// const { response } = require('../app')
+
 const objectId = require('mongodb').ObjectId
 module.exports = {
     addProduct: (body, files) => {
         body.images = files
         body.price = parseInt(body.price)
-        body.offerPrices=body. price
-        body. offerstatus=false;
-        
-        
+        body.offerPrices = body.price
+        body.offerstatus = false;
         return new Promise(async (resolve, reject) => {
             await db.get().collection(collection.PRODUCT_COLLECTION).insertOne(body)
             resolve();
         })
     },
-    addOffer:(offer)=>{
-    
-        return new Promise((resolve,reject)=>{
+    addOffer: (offer) => {
 
-       
-        db.get().collection(collection.OFFER_COLLECTION).insertOne(offer).then((result)=>{
-            resolve(result)
+        return new Promise((resolve, reject) => {
+
+
+            db.get().collection(collection.OFFER_COLLECTION).insertOne(offer).then((result) => {
+                resolve(result)
+            })
         })
-    })
     },
 
     getAllProducts: () => {
         return new Promise(async (resolve, reject) => {
             let products = await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
-            // console.log(products);
-            console.log("444");
+
             resolve(products)
         })
     },
-    getOffer:()=>{
-        return new Promise(async(resolve,reject)=>{
-            let offer=await db.get().collection(collection.OFFER_COLLECTION).find().toArray()
+    getOffer: () => {
+        return new Promise(async (resolve, reject) => {
+            let offer = await db.get().collection(collection.OFFER_COLLECTION).find().toArray()
             resolve(offer)
         })
     },
     deleteProduct: (prodId) => {
         return new Promise((resolve, reject) => {
-            console.log(prodId)
+        
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({ _id: objectId(prodId) }).then((response) => {
-                console.log(response);
+
                 resolve(response)
             })
         })
     },
 
     getProductDetails: (proId) => {
-        return new Promise(async (resolve,reject) => {
-            console.log("*************************************")
-            console.log(proId)
-            console.log("*************************************")
-            try{
+        return new Promise(async (resolve, reject) => {
+
+            try {
                 let product = await db.get().collection(collection.PRODUCT_COLLECTION).findOne({ _id: objectId(proId) })
 
                 resolve(product)
-            }catch(error){
+            } catch (error) {
                 reject()
             }
-            
+
         })
     },
     updateProduct: (proId, proDetails) => {
-        console.log('22222222222222222222222222222222222222222');
-        console.log(proId);
         return new Promise((resolve, reject) => {
             db.get().collection(collection.PRODUCT_COLLECTION).updateOne({ _id: objectId(proId) }, {
                 $set: {
@@ -104,7 +96,7 @@ module.exports = {
             console.log(prodId)
 
             db.get().collection(collection.USER_COLLECTION).deleteOne({ _id: objectId(prodId) }).then((response) => {
-                console.log(response);
+
                 resolve(response)
             })
         })
@@ -146,26 +138,16 @@ module.exports = {
     },
     Category: (body, files) => {
         body.images = files
-        body.Offer=parseInt(body.Offer)
+        body.Offer = parseInt(body.Offer)
 
         return new Promise(async (resolve, reject) => {
             await db.get().collection(collection.CATEGORY_COLLECTION).insertOne(body)
             resolve();
         })
     },
-    // Category: (data) => {
-    //     return new Promise(async (resolve, reject) => {
-    //         data.offers = parseInt(data.offers)
-    //         db.get().collection(collection.CATEGORY_COLLECTION).insertOne(data).then((response) => {
-    //             resolve(response)
-    //             console.log(response);
-    //         })
 
-    //     })
-
-    // },
     getCategory: () => {
-        console.log("bbssshduhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
         return new Promise(async (resolve, reject) => {
             let category = db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
             resolve(category)
@@ -189,9 +171,9 @@ module.exports = {
     },
     getCategoryDetails: (proId) => {
         return new Promise(async (resolve, reject) => {
-            console.log("*************************************")
+
             console.log(proId)
-            console.log("*************************************")
+
             let category = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({ _id: objectId(proId) })
 
             resolve(category)
@@ -201,16 +183,15 @@ module.exports = {
 
 
     updateCategory: (proId, proDetails) => {
-        console.log('22222222222222222222222222222222222222222');
-        console.log(proId);
-        console.log(proDetails);
-        proDetails.Offer =parseInt(proDetails.Offer)
+
+
+        proDetails.Offer = parseInt(proDetails.Offer)
         return new Promise((resolve, reject) => {
             db.get().collection(collection.CATEGORY_COLLECTION).updateOne({ _id: objectId(proId) }, {
                 $set: {
                     Name: proDetails.Name,
-                    
-                    Offer:proDetails.Offer
+
+                    Offer: proDetails.Offer
 
                 }
             }).then((response) => {
@@ -254,40 +235,6 @@ module.exports = {
 
         })
     },
-    // getOrderProduct:()=>{
-    //     return new Promise(async(resolve,reject)=>{
-    //         let orderProduct=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-    //             {
-    //                 $unwind:'$products',
-    //             },
-    //             {
-    //                $project: {
-    //                 item:'$products.item',
-    //                 quantity:'$prodcts.quantity'
-    //                }
-    //             },
-    //             {
-    //                 $lookup:{
-    //                     from:collection.PRODUCT_COLLECTION, 
-    //                     localField:'item',
-    //                     foreignField: '_id',
-    //                     as: 'product'
-
-    //                 }
-    //             },
-    //             {
-    //                 $project:{
-    //                     item:1,
-    //                     quantity:1,
-    //                     product:{ $arrayElemAt: ['$product', 0]}
-    //                 }
-    //             }
-    //         ]).toArray()
-    //         console.log(orderProduct);
-    //         console.log("order vannu");
-    //         resolve(orderProduct)
-    //     })
-    // },
 
 
     cancelOrder: (userId) => {
@@ -357,7 +304,7 @@ module.exports = {
                 }
 
             ]).toArray()
-            console.log(dailysale)
+
             resolve(dailysale)
         })
     },
@@ -371,9 +318,6 @@ module.exports = {
                         $match: {
 
                             "status": { $nin: ["cancelled", "Pending"] }
-
-
-
 
                         },
                     },
@@ -390,8 +334,7 @@ module.exports = {
 
                 ])
                 .toArray();
-            console.log('................................................................................');
-            console.log(monthlySales);
+
             resolve(monthlySales);
         });
     },
@@ -425,8 +368,7 @@ module.exports = {
 
                 ])
                 .toArray();
-            console.log("year");
-            console.log(yearlySales);
+
             resolve(yearlySales);
         });
     },
@@ -440,8 +382,8 @@ module.exports = {
                     }
                 },
             ]).toArray()
-            console.log(total);
-            console.log("kktfkygoygygyug");
+
+
             if (total[0]) {
                 resolve(total[0].total)
             } else {
@@ -467,8 +409,7 @@ module.exports = {
                     }
                 },
             ]).toArray()
-            console.log(total);
-            console.log("kktfkygoygygyug");
+
             if (total[0]) {
                 resolve(total[0].total)
             } else {
@@ -478,37 +419,36 @@ module.exports = {
         })
 
     },
-    totalCod:()=>{ 
-         return new Promise(async (resolve, reject) => {
-        total = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-
-            {
-                $match: {
-                    paymentMethod: "COD",
-                },
-            },
-            {
-                $group: {
-                    _id: null,
-                    total: { $sum: '$totalAmount' }
-                }
-            },
-        ]).toArray()
-        console.log(total);
-        console.log("kktfkygoygygyug");
-        if (total[0]) {
-            resolve(total[0].total)
-        } else {
-            resolve(0)
-        }
-
-    })
-
-    },
-    totalRazorpay:()=>{
+    totalCod: () => {
         return new Promise(async (resolve, reject) => {
             total = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-    
+
+                {
+                    $match: {
+                        paymentMethod: "COD",
+                    },
+                },
+                {
+                    $group: {
+                        _id: null,
+                        total: { $sum: '$totalAmount' }
+                    }
+                },
+            ]).toArray()
+
+            if (total[0]) {
+                resolve(total[0].total)
+            } else {
+                resolve(0)
+            }
+
+        })
+
+    },
+    totalRazorpay: () => {
+        return new Promise(async (resolve, reject) => {
+            total = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+
                 {
                     $match: {
                         paymentMethod: "RAZORPAY",
@@ -521,144 +461,137 @@ module.exports = {
                     }
                 },
             ]).toArray()
-            console.log(total);
-            console.log("kktfkygoygygyug");
+
             if (total[0]) {
                 resolve(total[0].total)
             } else {
                 resolve(0)
             }
-    
+
         })
 
     },
-    applyOffer:(proId,Offer)=>{
-        return new Promise(async(resolve,reject)=>{
-            let product=await db.get().collection(collection.PRODUCT_COLLECTION).find({_id:objectId(proId)} ).toArray()
-            let offer=await db.get().collection(collection.OFFER_COLLECTION).find({_id:objectId(Offer.offer)}).toArray()
-            console.log(product[0].price);
-            console.log(offer[0].offer);
-            console.log("7777777777777777777777");
-        
-        let price=product[0].price;
-        let offers=1-parseInt(offer[0].offer)/100
-            offerPrice=price*offers
-            discountPrice=price-offerPrice;
+    applyOffer: (proId, Offer) => {
+        return new Promise(async (resolve, reject) => {
+            let product = await db.get().collection(collection.PRODUCT_COLLECTION).find({ _id: objectId(proId) }).toArray()
+            let offer = await db.get().collection(collection.OFFER_COLLECTION).find({ _id: objectId(Offer.offer) }).toArray()
 
 
-            db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proId)},
-            {
-                $set:{
-                    offerPrices:Math.round(offerPrice),
-                    DiscountPrice:Math.round(discountPrice),
+            let price = product[0].price;
+            let offers = 1 - parseInt(offer[0].offer) / 100
+            offerPrice = price * offers
+            discountPrice = price - offerPrice;
 
-                    offerPercentage:offer[0].offer,
-                    offerstatus:true
-                }
-            }).then((result)=>{
-                resolve(result)
-            })
-             
+
+            db.get().collection(collection.PRODUCT_COLLECTION).updateOne({ _id: objectId(proId) },
+                {
+                    $set: {
+                        offerPrices: Math.round(offerPrice),
+                        DiscountPrice: Math.round(discountPrice),
+
+                        offerPercentage: offer[0].offer,
+                        offerstatus: true
+                    }
+                }).then((result) => {
+                    resolve(result)
+                })
+
         })
 
     },
-    updateOffers:(Name)=>{
+    updateOffers: (Name) => {
         console.log(Name);
-        return new Promise(async(resolve,reject)=>{
-            let category= await db.get().collection(collection.CATEGORY_COLLECTION).findOne({Name:Name.data})
-            console.log(category);
-            console.log("..........");
-            console.log(Name.data);
-            let product=await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
-            {
-                $match: {
-                    category:Name.data,
-                }},
+        return new Promise(async (resolve, reject) => {
+            let category = await db.get().collection(collection.CATEGORY_COLLECTION).findOne({ Name: Name.data })
+            let product = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                {
+                    $match: {
+                        category: Name.data,
+                    }
+                },
             ]).toArray()
-            console.log(product);
-            console.log("product vannuu");
+
             resolve(product)
 
-            product.map(async(value,index)=>{
-                let id=value._id
-                let offers=value.price-category.Offer
+            product.map(async (value, index) => {
+                let id = value._id
+                let offers = value.price - category.Offer
                 console.log(offers);
-                await db.get().collection(collection.PRODUCT_COLLECTION).updateMany({_id:objectId(id)},
-                {
-                    $set:{
-                        price:offers,
-                    }
-                })
+                await db.get().collection(collection.PRODUCT_COLLECTION).updateMany({ _id: objectId(id) },
+                    {
+                        $set: {
+                            price: offers,
+                        }
+                    })
             })
             resolve()
 
         })
 
     },
-    addcoupon:(body)=>{
-        body.couponOffer=parseInt(body.couponOffer)
-        return new Promise(async(resolve,reject)=>{
-            Coupon=await db.get().collection(collection.COUPON_COLLECTION).insertOne(body)
+    addcoupon: (body) => {
+        body.couponOffer = parseInt(body.couponOffer)
+        return new Promise(async (resolve, reject) => {
+            Coupon = await db.get().collection(collection.COUPON_COLLECTION).insertOne(body)
 
             resolve()
         })
     },
-    getAllCoupon:()=>{
-        return new Promise(async(resolve,reject)=>{
-            coupon=await db.get().collection(collection.COUPON_COLLECTION).find().toArray()
+    getAllCoupon: () => {
+        return new Promise(async (resolve, reject) => {
+            coupon = await db.get().collection(collection.COUPON_COLLECTION).find().toArray()
             resolve(coupon)
         })
     },
-  
-getSaleReport:(from,to)=>{
-console.log(from)
-console.log(to)
-    return new Promise(async(resolve,reject)=>{
-      let  report=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
-           {
-             $match:{
-                date:{
-                    $gte:from,
-                    $lte:to
+
+    getSaleReport: (from, to) => {
+
+        return new Promise(async (resolve, reject) => {
+            let report = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match: {
+                        date: {
+                            $gte: from,
+                            $lte: to
+                        },
+                    }
                 },
-            }
-        },
-        {
-            $lookup:{
-                from:collection.PRODUCT_COLLECTION,
-                localField:'products.item',
-                foreignField:'_id',
-                as:'product'
-            }
-        },{
-            $lookup:{
-                from:collection.USER_COLLECTION,
-                localField:'userId',
-                foreignField:'_id',
-                as:'user'
-            }
-        }
+                {
+                    $lookup: {
+                        from: collection.PRODUCT_COLLECTION,
+                        localField: 'products.item',
+                        foreignField: '_id',
+                        as: 'product'
+                    }
+                }, {
+                    $lookup: {
+                        from: collection.USER_COLLECTION,
+                        localField: 'userId',
+                        foreignField: '_id',
+                        as: 'user'
+                    }
+                }
 
-        ]).toArray()
-        resolve(report)
+            ]).toArray()
+            resolve(report)
 
 
-    })
-},
-removeOffer:(proId)=>{
-    return new Promise((resolve,reject)=>{
-        db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proId)},{
-            $set:{
-                offerPrices:0,
-                offerPercentage:0,
-                DiscountPrice:0,
-                offerstatus:false,
-
-
-            }
-        }).then((response)=>{
-            resolve(response)
         })
-    })
-}
+    },
+    removeOffer: (proId) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collection.PRODUCT_COLLECTION).updateOne({ _id: objectId(proId) }, {
+                $set: {
+                    offerPrices: 0,
+                    offerPercentage: 0,
+                    DiscountPrice: 0,
+                    offerstatus: false,
+
+
+                }
+            }).then((response) => {
+                resolve(response)
+            })
+        })
+    }
 }

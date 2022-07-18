@@ -78,9 +78,9 @@
 
         <div class="modal-body">
           <form action="/admin/applyoffer/{{this._id}}" method="post">
-            <label for="category">Category</label>
+            <label for="category">OFFER</label>
             <select class="custom-select tm-select-accounts" id="category" name="offer">
-              <option selected>Select category</option>
+              <option selected>Select offer</option>
               {{#each ../offers }}
               <option value="{{this._id}}">{{this.name}}</option>
 

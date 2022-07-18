@@ -5,11 +5,11 @@
        
         <!-- Hero Area End-->
         <!--================login_part Area =================-->
-        <section class="login_part section_padding ">
+        <section class="login_part  gradient-custom ">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
-                        <div class="login_part_text text-center">
+                        <div class="login_part_text text-center" style="height:375px">
                             <div class="login_part_text_iner">
                                 <h2>New to our Shop?</h2>
                                 <p>There are advances being made in science and technology
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="login_part_form">
-                            <div class="login_part_form_iner">
+                            <div class="login_part_form_iner ">
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
                                 <form class="row contact_form" action="/signup" method="post" >
@@ -61,8 +61,8 @@
 
                                     
                                     <div class="col-md-12 form-group">
-                                        
-                                          <button type="submit" class="btn btn-primary btn-lg"
+                                         
+                                          <button type="submit" class=" btn-primary btn-lg"  style="background: #2577fd;width: 215px;border: unset;border-radius: 5px;height: 47px"
                                             onclick="return validation()">signup</button>
                                         
                                     </div>
@@ -146,3 +146,15 @@
         return true
     }
 </script>
+<style>
+  .gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgb(210 199 223), rgb(180, 187, 199))
+  }
+</style>

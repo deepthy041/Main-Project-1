@@ -1,8 +1,8 @@
  <main>
       <!--================ confirmation part start =================-->
-      <section class="confirmation_part section_padding">
+      <section class="confirmation_part mt-3  h-100 gradient-custom ">
         <div class="container">
-          <div class="row">
+          <div class="row justify-content-center ">
             
             {{!-- <div class="col-lg-6 col-lx-4">
               <div class="single_confirmation_details">
@@ -23,47 +23,54 @@
                 </ul>
               </div>
             </div> --}}
-            <div class="col-lg-12 col-lx-4">
+            <div class="col-lg-8 col-lx-4 shadow-lg mt-5">
               <div class="single_confirmation_details">
                 <h4>SHOPPING Address</h4>
                 {{#if orders}}
-                <ul>
+                <ul >
                  {{#each products}}
-                    <img style="height:200px; width: 200px; " id=featured src="/productimages/{{product.images.[0]}}">
-                    <li>
-                      <p>Name</p><span>:{{product.Name}}</span>
-                    </li>
-                    
-                    <li>
-                      <p>Quantity</p><span>:{{this.quantity}}</span>
-                    </li>
-                     
-                  <li>
-
-                  {{/each}}
                  
-                    <p>Date</p><span>: {{orders.date}}</span>
+                    
+                   
+                      <div class="d-flex ">
+                        <div>
+                           <img style="height:100px; width: 100px; "  src="/productimages/{{product.images.[0]}}">
+                        </div>
+                         
+                        
+                      <div class="p-3 pt-5">
+                        <span>{{product.Name}}</span><br>
+                      <span>Quantity:{{this.quantity}}</span>
+                      </div>
+                      </div>
+                    <hr>
+                       {{/each}}
+                  <li style="padding-left: 31%">
+
+                
+                 
+                    <p>Date</p>: {{orders.date}}
                   </li>
-                  <li>
+                  <li style="padding-left: 31%">
                     <p>Name</p><span>: {{orders.deliveryDetails.name}}</span>
                   </li>
-                  <li>
+                  <li style="padding-left: 31%">
                     <p>Address</p><span>: {{orders.deliveryDetails.address}}</span>
                   </li>
-                  <li>
+                  <li style="padding-left: 31%">
                     <p>Mobile</p><span>: {{orders.deliveryDetails.mobile}}</span>
                   </li>
                  
-                    <li>
+                    <li style="padding-left: 31%">
                       <p>Price</p><span>: {{orders.totalAmount}}</span>
                     </li>
-                     <li>
+                     <li style="padding-left: 31%">
                     <p>pincode</p><span>: {{orders.deliveryDetails.pincode}}</span>
                   </li>
-                  <li>
+                  <li style="padding-left: 31%">
                     <p>Status</p><span>: {{orders.status}}</span>
                   </li>
-                  <li>
+                  <li style="padding-left: 31%">
                     <p>Payment-method</p><span>: {{orders.paymentMethod}}</span>
                   </li>
 
@@ -184,6 +191,7 @@
           {{/each}}
       </tbody>
       </table> --}}
+      </section>
   </main>
  
   <!--? Search model Begin -->
@@ -197,4 +205,15 @@
   </div>
   <!-- Search model end -->
 
-  
+  <style>
+    .gradient-custom {
+/* fallback for old browsers */
+background: #6a11cb;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right,rgb(210 199 223), rgb(162 188 231));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgb(210 199 223), rgb(162 188 231))
+}
+</style>
