@@ -10,7 +10,11 @@ const async = require('hbs/lib/async');
 const { response } = require('express');
 const shortid=require('shortid')
 const paypal = require('paypal-rest-sdk');
-const client = require('twilio')(otp.accountSID, otp.authToken)
+require('dotenv').config()
+const SSID=process.env.serviceSID
+const ASID=process.env.accountSID
+const AUID=process.env.authToken
+const client = require('twilio')(ASID, AUID)
 
 /* GET home page. */
 const verifyLogin = (req, res, next) => {
@@ -143,7 +147,7 @@ router.post('/otp',(req,res)=>{
    console.log(Otp);
    console.log(req.session.phone);
   client.verify
-  .services(otp.serviceSID)
+  .services(SSID)
   .verificationChecks.create({
     to:`+91${req.session.phone}`,
     code:Otp
@@ -189,7 +193,7 @@ if(req.body.Email&&req.body.password){
     } else {
       userHelpers.doSignup(req.session.newuser).then((response) => {
         client.verify
-    .services(otp.serviceSID)
+    .services(SSID)
     .verifications.create({
       to:`+91${req.body.Number}`,
       channel:"sms"
