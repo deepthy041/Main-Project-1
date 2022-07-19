@@ -1,6 +1,6 @@
 
-    <main>
-    <div class="card-body h-100 gradient-custom p-3  d-flex mb-5 bg-white rounded">
+    <main class="d-flex">
+    <div class=" d-flex card-body h-100 gradient-custom p-3  mb-5 bg-white rounded">
         <div class="card-body d-flex  justify-content-center  ">
             {{!-- shadow-lg --}}
             {{!-- <p class="card-text" style="font-weight: bolder; font-size: large; color: black;">
@@ -11,13 +11,15 @@
                     onclick="selectAddress('{{@index}}')">
 
             </div> --}}
-            <div class="card shadow-lg mt-5" style="width: 38rem; height:20em; background-color: seashell;">
+            
+            
+            <div class="col-md-6 card shadow-lg mt-5" style="width: 38rem; height:20em; background-color: seashell;">
                 {{!-- <img class="card-img-top" src="https://www.flaticon.com/premium-icon/accept_4315445" alt="Card image cap"> --}}
                     <p class="card-text  pl-5  mt-5">
                 
                
-                        <h1 style="color: green;" class="text-center">Order placed successfully</h1></p>
-                        <div class="txttxt d-flex justify-content-center mt-3">
+                        <h1  style="color: green;" class="text-center">Order placed successfully</h1></p>
+                        <div class="txt d-flex justify-content-center mt-3">
                     <a href="/orders" class="btn btn-primary align-center " style="background-color: rgb(110, 140, 192);">View Orders</a>
                     </div>
                 </div>

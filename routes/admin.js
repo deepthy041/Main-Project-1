@@ -97,14 +97,16 @@ else{
   let cod=Math.round(cods)
   let razorpays=await productHelpers.totalRazorpay()
   let razorpay=Math.round(razorpays)
-  let dailysale=await productHelpers.getDailySale()
-  console.log("dailysale")
-  console.log(dailysale)
-  let monthlysale = await productHelpers.getMonthlySale()
-  console.log("monthlysale")
-  console.log(monthlysale)
-  let yearlysale = await productHelpers.getYearlySale()
-  console.log(yearlysale)        
+  let dailysales=await productHelpers.getDailySale()
+  let dailysale=Math.round(dailysales)
+ 
+  let monthlySales = await productHelpers.getMonthlySale()
+  let monthlysale=Math.round(monthlySales)
+
+ 
+  let yearlysales = await productHelpers.getYearlySale()
+       
+  let yearlysale=Math.round(yearlysales)
   
   
     res.render('admin/admin-home',{admin:true,totalsale,paypal,cod,razorpay,dailysale,monthlysale,yearlysale,report:req.session.report}) 
