@@ -691,8 +691,8 @@ module.exports = {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "http://deepthyprasad.com/success",
-                    "cancel_url": "http://deepthyprasad.com/cancel"
+                    "return_url": "https://deepthyprasad.com/success",
+                    "cancel_url": "https://deepthyprasad.com/cancel"
                 },
                 "transactions": [{
                     "item_list": {
