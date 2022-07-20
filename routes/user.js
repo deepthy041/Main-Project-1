@@ -244,7 +244,10 @@ router.get('/view-cart', verifyLogin, async (req, res) => {
  
     
     let products = await userHelpers.getCartProducts(req.session.userData._id)
-   products[0].offer=products[0].offer??0
+    // if(products){
+    //   products[0].offer=products[0].offer??0
+    // }
+   
      let totalVal = await userHelpers.getTotalAmount(req.session.userData._id)
    
   let totalValue=Math.round(totalVal)
