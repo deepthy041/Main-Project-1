@@ -433,7 +433,8 @@ router.get('/delete-address/:id', (req, res) => {
 //.......................Orders..................................//
 
 router.get('/orders',verifyLogin, async (req, res) => {
-  let orders = await userHelpers.getsingleUserorder(req.session.orderId)
+  
+  let orders = await userHelpers.getsingleUserorder(req.session.orderId,req.session.userData._id)
   let products = await userHelpers.getOrderProducts(req.session.orderId)
 
 

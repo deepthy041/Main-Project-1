@@ -418,6 +418,9 @@ router.get('/removeOffer/:id',(req,res)=>{
     res.json(response);
   })
 })
+// router.get('/admin-homes',(req,res)=>{
+//   res.render('admin/admin-homes',{admin:true})
+// })
 
 
 module.exports = router;

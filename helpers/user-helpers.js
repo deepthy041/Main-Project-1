@@ -446,7 +446,7 @@ module.exports = {
                             coupon: coupon
                         }
                     })
-                db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(user._id) })
+                
                
                 resolve(response.insertedId)
 
@@ -564,9 +564,10 @@ module.exports = {
             resolve(orderItems)
         })
     },
-    getsingleUserorder: (orderId) => {
+    getsingleUserorder: (orderId,userId) => {
         return new Promise((resolve, reject) => {
             db.get().collection(collection.ORDER_COLLECTION).findOne({ _id: objectId(orderId) }).then((order) => {
+                db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(userId) })
 
                 resolve(order)
             })
